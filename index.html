@@ -61,6 +61,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-原型对象的重写" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/09/原型对象的重写/" class="article-date">
+  <time datetime="2017-02-09T04:57:54.000Z" itemprop="datePublished">2017-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/09/原型对象的重写/">原型对象的重写</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原型对象的重写与添加是不一样的，举例：</p>
+<pre><code>var friend=new Person();
+Person.prototype.sayHi=function(){
+    alert(&quot;hi&quot;);
+}
+friend.sayHi();//输出&quot;hi&quot;
+</code></pre><p>在上面这个例子中虽然实例需要调用的函数在实例创建之后才调用的，但是因为这是改写，所以新写的函数仍在原型链中，向上搜索就能找到，再来看下面这个例子。</p>
+<pre><code>Person.prototype.sayHi=function(){
+    alert(&quot;hi&quot;);
+}
+var friend=new Person();
+Person.prototype={
+    age:10,
+    sayHi:function(){
+        alert(&quot;hi2&quot;);
+    }
+}
+friend.sayHi();
+</code></pre><p>在这个例子里最后输出的是”hi”而不是”hi2”，可见当对prototype用字面量的方式重写之后，原来由该对象创造的实例仍然指向原先的对象。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="ciyxwyx100002n5f6fondpndf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-margin-top的失效" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/09/margin-top的失效/" class="article-date">
@@ -119,7 +174,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="ciyxwqt3v0000raf6h6hwytm5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="ciyxwyx0t0000n5f60p7ivk2p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +210,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="ciyxwqt400001raf637xo7sf8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="ciyxwyx0y0001n5f6d4tm4w8d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,6 +248,10 @@ background: #FFCC33;
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/09/原型对象的重写/">原型对象的重写</a>
+          </li>
         
           <li>
             <a href="/2017/02/09/margin-top的失效/">margin-top在特殊情况下的失效</a>
