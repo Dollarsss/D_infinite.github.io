@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,48 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-通过闭包解决循环异步问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/20/通过闭包解决循环异步问题/" class="article-date">
+  <time datetime="2017-02-20T06:47:51.000Z" itemprop="datePublished">2017-02-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/20/通过闭包解决循环异步问题/">通过闭包解决循环异步问题 </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在循环当中，如果调用回调函数，往往不能如愿，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for(var k=0;k&lt;10;k++)&#123;</div><div class="line"> setTimeout(function()&#123;</div><div class="line">  console.log(k);</div><div class="line"> &#125;,100);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>按照正常想法，你可能会认为在控制台中会输出0到9，但实际上最后输出的结果是<code>999999999</code>，为什么会这样呢，很简单，因为回调函数是延迟执行，因此当循环执行完时，才在控制台中输出k值，而这时候相当于十个函数共享一个k值，那必然是得不到你想要的结果。</p>
+<p>想要解决，需要使用闭包，方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> for(var k=0;k&lt;10;k++)&#123;</div><div class="line">	(function(j)&#123;</div><div class="line">		console.log(j);</div><div class="line">	&#125;)(k);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过IIFE（立即函数执行表达式，不懂自行google），即可形成一个新的块级作用域，而这个块级作用域保留了循环时的k值，从而完成了最终我们要达到的效果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cizdqqtp50002cnf6f4ooo3m0" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-js中的正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,7 +147,7 @@ RegExp.prototype.exec(String)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cizdko6l40000zzf6bpfhy3cy" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cizdqqtoy0000cnf6422p3ger" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -160,7 +202,7 @@ friend.sayHi();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="ciyxwyx100002n5f6fondpndf" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cizdqqtp90004cnf6sdlmjwfu" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -228,7 +270,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="ciyxwyx0t0000n5f60p7ivk2p" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="cizdqqtp80003cnf6a0ul83w8" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -264,7 +306,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="ciyxwyx0y0001n5f6d4tm4w8d" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="cizdqqtp30001cnf6sa38joec" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -289,7 +331,7 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
@@ -299,9 +341,13 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/20/通过闭包解决循环异步问题/">通过闭包解决循环异步问题 </a>
+          </li>
         
           <li>
             <a href="/2017/02/20/js中的正则表达式/">js中的正则表达式</a>
@@ -332,7 +378,7 @@ background: #FFCC33;
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

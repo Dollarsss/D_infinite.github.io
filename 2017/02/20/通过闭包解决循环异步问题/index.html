@@ -3,36 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>原型对象的重写 | D_infinite的小站</title>
+  <title>通过闭包解决循环异步问题  | D_infinite的小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原型对象的重写与添加是不一样的，举例：
-var friend=new Person();
-Person.prototype.sayHi=function(){
-    alert(&amp;quot;hi&amp;quot;);
-}
-friend.sayHi();//输出&amp;quot;hi&amp;quot;
-在上面这个例子中虽然实例需要调用的函数在实例创建之后才调用的，但是因为这是改写，所以新写的函数仍在原型链中，向上搜">
+  <meta name="description" content="在循环当中，如果调用回调函数，往往不能如愿，如：
+12345for(var k=0;k&amp;lt;10;k++)&amp;#123; setTimeout(function()&amp;#123;  console.log(k); &amp;#125;,100);&amp;#125;
+按照正常想法，你可能会认为在控制台中会输出0到9，但实际上最后输出的结果是999999999，为什么会这样呢，很简单，因为回调函数是延迟执行，因此当循">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型对象的重写">
-<meta property="og:url" content="http://yoursite.com/2017/02/09/原型对象的重写/index.html">
+<meta property="og:title" content="通过闭包解决循环异步问题 ">
+<meta property="og:url" content="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/index.html">
 <meta property="og:site_name" content="D_infinite的小站">
-<meta property="og:description" content="原型对象的重写与添加是不一样的，举例：
-var friend=new Person();
-Person.prototype.sayHi=function(){
-    alert(&amp;quot;hi&amp;quot;);
-}
-friend.sayHi();//输出&amp;quot;hi&amp;quot;
-在上面这个例子中虽然实例需要调用的函数在实例创建之后才调用的，但是因为这是改写，所以新写的函数仍在原型链中，向上搜">
-<meta property="og:updated_time" content="2017-02-09T04:58:22.000Z">
+<meta property="og:description" content="在循环当中，如果调用回调函数，往往不能如愿，如：
+12345for(var k=0;k&amp;lt;10;k++)&amp;#123; setTimeout(function()&amp;#123;  console.log(k); &amp;#125;,100);&amp;#125;
+按照正常想法，你可能会认为在控制台中会输出0到9，但实际上最后输出的结果是999999999，为什么会这样呢，很简单，因为回调函数是延迟执行，因此当循">
+<meta property="og:updated_time" content="2017-02-20T06:48:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型对象的重写">
-<meta name="twitter:description" content="原型对象的重写与添加是不一样的，举例：
-var friend=new Person();
-Person.prototype.sayHi=function(){
-    alert(&amp;quot;hi&amp;quot;);
-}
-friend.sayHi();//输出&amp;quot;hi&amp;quot;
-在上面这个例子中虽然实例需要调用的函数在实例创建之后才调用的，但是因为这是改写，所以新写的函数仍在原型链中，向上搜">
+<meta name="twitter:title" content="通过闭包解决循环异步问题 ">
+<meta name="twitter:description" content="在循环当中，如果调用回调函数，往往不能如愿，如：
+12345for(var k=0;k&amp;lt;10;k++)&amp;#123; setTimeout(function()&amp;#123;  console.log(k); &amp;#125;,100);&amp;#125;
+按照正常想法，你可能会认为在控制台中会输出0到9，但实际上最后输出的结果是999999999，为什么会这样呢，很简单，因为回调函数是延迟执行，因此当循">
   
     <link rel="alternate" href="/atom.xml" title="D_infinite的小站" type="application/atom+xml">
   
@@ -81,10 +69,10 @@ friend.sayHi();//输出&amp;quot;hi&amp;quot;
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-原型对象的重写" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-通过闭包解决循环异步问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/09/原型对象的重写/" class="article-date">
-  <time datetime="2017-02-09T04:57:54.000Z" itemprop="datePublished">2017-02-09</time>
+    <a href="/2017/02/20/通过闭包解决循环异步问题/" class="article-date">
+  <time datetime="2017-02-20T06:47:51.000Z" itemprop="datePublished">2017-02-20</time>
 </a>
     
   </div>
@@ -95,7 +83,7 @@ friend.sayHi();//输出&amp;quot;hi&amp;quot;
         
   
     <h1 class="article-title" itemprop="name">
-      原型对象的重写
+      通过闭包解决循环异步问题 
     </h1>
   
 
@@ -103,30 +91,17 @@ friend.sayHi();//输出&amp;quot;hi&amp;quot;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>原型对象的重写与添加是不一样的，举例：</p>
-<pre><code>var friend=new Person();
-Person.prototype.sayHi=function(){
-    alert(&quot;hi&quot;);
-}
-friend.sayHi();//输出&quot;hi&quot;
-</code></pre><p>在上面这个例子中虽然实例需要调用的函数在实例创建之后才调用的，但是因为这是改写，所以新写的函数仍在原型链中，向上搜索就能找到，再来看下面这个例子。</p>
-<pre><code>Person.prototype.sayHi=function(){
-    alert(&quot;hi&quot;);
-}
-var friend=new Person();
-Person.prototype={
-    age:10,
-    sayHi:function(){
-        alert(&quot;hi2&quot;);
-    }
-}
-friend.sayHi();
-</code></pre><p>在这个例子里最后输出的是”hi”而不是”hi2”，可见当对prototype用字面量的方式重写之后，原来由该对象创造的实例仍然指向原先的对象。</p>
+        <p>在循环当中，如果调用回调函数，往往不能如愿，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for(var k=0;k&lt;10;k++)&#123;</div><div class="line"> setTimeout(function()&#123;</div><div class="line">  console.log(k);</div><div class="line"> &#125;,100);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>按照正常想法，你可能会认为在控制台中会输出0到9，但实际上最后输出的结果是<code>999999999</code>，为什么会这样呢，很简单，因为回调函数是延迟执行，因此当循环执行完时，才在控制台中输出k值，而这时候相当于十个函数共享一个k值，那必然是得不到你想要的结果。</p>
+<p>想要解决，需要使用闭包，方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> for(var k=0;k&lt;10;k++)&#123;</div><div class="line">	(function(j)&#123;</div><div class="line">		console.log(j);</div><div class="line">	&#125;)(k);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过IIFE（立即函数执行表达式，不懂自行google），即可形成一个新的块级作用域，而这个块级作用域保留了循环时的k值，从而完成了最终我们要达到的效果。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cizdqqtp90004cnf6sdlmjwfu" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cizdqqtp50002cnf6f4ooo3m0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -135,19 +110,10 @@ friend.sayHi();
     
 <nav id="article-nav">
   
-    <a href="/2017/02/20/js中的正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
-      <div class="article-nav-title">
-        
-          js中的正则表达式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/02/09/margin-top的失效/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/02/20/js中的正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">margin-top在特殊情况下的失效</div>
+      <div class="article-nav-title">js中的正则表达式</div>
     </a>
   
 </nav>
