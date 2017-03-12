@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,55 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-php中的弱类型转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/php中的弱类型转换/" class="article-date">
+  <time datetime="2017-03-12T04:32:50.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/php中的弱类型转换/">php中的弱类型转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于php中的类型转换是自动转换，因此在设计网站时，容易给入侵者有可乘之机，先让我们来看看php的类型转换是如何判别的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$foo = &quot;0&quot;;  // $foo 是字符串 (ASCII 48)</div><div class="line">$foo += 2;   // $foo 现在是一个整数 (2)</div><div class="line">$foo = $foo + 1.3;  // $foo 现在是一个浮点数 (3.3)</div><div class="line">$foo = 5 + &quot;10 Little Piggies&quot;; // $foo 是整数 (15)</div><div class="line">$foo = 5 + &quot;10 Small Pigs&quot;;     // $foo 是整数 (15)</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<p>以上这段代码摘自官方手册，前面的<code>$foo</code>被转换成float可以理解，这跟c是相像的，因为1.3是float，为了计算能够进行下去，int也被转换成了float。但是后面是怎么回事呢？</p>
+<p>让我们来看看官方手册中对字符串转换成数值的解释：</p>
+<blockquote>
+<p>当一个字符串被当作一个数值来取值，其结果和类型如下：</p>
+<p>如果该字符串没有包含 ‘.’，’e’ 或 ‘E’ 并且其数字值在整型的范围之内（由 PHP_INT_MAX 所定义），该字符串将被当成 integer 来取值。其它所有情况下都被作为 float 来取值。</p>
+<p>该字符串的开始部分决定了它的值。如果该字符串以合法的数值开始，则使用该数值。否则其值为 0（零）。合法数值由可选的正负号，后面跟着一个或多个数字（可能有小数点），再跟着可选的指数部分。指数部分由 ‘e’ 或 ‘E’ 后面跟着一个或多个数字构成。</p>
+</blockquote>
+<p>因此，php为了让数值符合对应类型，会自动采取强制转换手段，这就有机会在web操作中绕过后台验证或者做别的事情。</p>
+<blockquote>
+<p>想了解更多不同类型的强制转换，请请参考<a href="http://php.net/manual/zh/language.types.type-juggling.php" target="_blank" rel="external">php官方手册</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/12/php中的弱类型转换/" data-id="cj066rfam0000xjf6fcq2otv1" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-通过闭包解决循环异步问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -93,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cizdqqtp50002cnf6f4ooo3m0" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cj066rfax0003xjf6idzvqhub" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -147,7 +196,7 @@ RegExp.prototype.exec(String)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cizdqqtoy0000cnf6422p3ger" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cj066rfb00005xjf6k70k7vyb" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -202,7 +251,7 @@ friend.sayHi();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cizdqqtp90004cnf6sdlmjwfu" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cj066rfay0004xjf6t4euh46s" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -270,7 +319,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="cizdqqtp80003cnf6a0ul83w8" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="cj066rfas0001xjf6cxaze5rb" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -306,7 +355,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="cizdqqtp30001cnf6sa38joec" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="cj066rfav0002xjf6rgwztyqt" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -331,9 +380,9 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -341,9 +390,13 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/12/php中的弱类型转换/">php中的弱类型转换</a>
+          </li>
         
           <li>
             <a href="/2017/02/20/通过闭包解决循环异步问题/">通过闭包解决循环异步问题 </a>
@@ -361,10 +414,6 @@ background: #FFCC33;
             <a href="/2017/02/09/margin-top的失效/">margin-top在特殊情况下的失效</a>
           </li>
         
-          <li>
-            <a href="/2016/12/26/你好，世界/">你好世界 </a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -378,7 +427,7 @@ background: #FFCC33;
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
