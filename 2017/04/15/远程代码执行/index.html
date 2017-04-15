@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   
-  <title>远程代码执行 | D_infinite的小站</title>
+  <title>远程命令执行 | D_infinite的小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="@(web安全)[命令, 执行, 远程]
-RCE(远程命令执行漏洞)###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
+  <meta name="description" content="###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
 ###0x02 常见命令执行模式
 &amp;lt;?php
 $cmd=$_GET[&amp;apos;cmd&amp;apos;]
@@ -14,13 +13,13 @@ if (isset($cmd)){
     system($cmd);
 }
 假设靶机ip地址为192.168.1.1。则
-http">
+http://192.168.1.1/index.php?cmd=ls
+将回">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程代码执行">
+<meta property="og:title" content="远程命令执行">
 <meta property="og:url" content="http://yoursite.com/2017/04/15/远程代码执行/index.html">
 <meta property="og:site_name" content="D_infinite的小站">
-<meta property="og:description" content="@(web安全)[命令, 执行, 远程]
-RCE(远程命令执行漏洞)###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
+<meta property="og:description" content="###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
 ###0x02 常见命令执行模式
 &amp;lt;?php
 $cmd=$_GET[&amp;apos;cmd&amp;apos;]
@@ -28,12 +27,12 @@ if (isset($cmd)){
     system($cmd);
 }
 假设靶机ip地址为192.168.1.1。则
-http">
-<meta property="og:updated_time" content="2017-04-15T13:04:42.000Z">
+http://192.168.1.1/index.php?cmd=ls
+将回">
+<meta property="og:updated_time" content="2017-04-15T13:07:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="远程代码执行">
-<meta name="twitter:description" content="@(web安全)[命令, 执行, 远程]
-RCE(远程命令执行漏洞)###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
+<meta name="twitter:title" content="远程命令执行">
+<meta name="twitter:description" content="###0x01 原理RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。
 ###0x02 常见命令执行模式
 &amp;lt;?php
 $cmd=$_GET[&amp;apos;cmd&amp;apos;]
@@ -41,7 +40,8 @@ if (isset($cmd)){
     system($cmd);
 }
 假设靶机ip地址为192.168.1.1。则
-http">
+http://192.168.1.1/index.php?cmd=ls
+将回">
   
     <link rel="alternate" href="/atom.xml" title="D_infinite的小站" type="application/atom+xml">
   
@@ -104,7 +104,7 @@ http">
         
   
     <h1 class="article-title" itemprop="name">
-      远程代码执行
+      远程命令执行
     </h1>
   
 
@@ -112,8 +112,7 @@ http">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>@(web安全)[命令, 执行, 远程]</p>
-<h2 id="RCE-远程命令执行漏洞"><a href="#RCE-远程命令执行漏洞" class="headerlink" title="RCE(远程命令执行漏洞)"></a>RCE(远程命令执行漏洞)</h2><p>###0x01 原理<br>RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。</p>
+        <p>###0x01 原理<br>RCE的原理相当简单，其实就是传入执行系统命令函数的参数未经过严格过滤。</p>
 <p>###0x02 常见命令执行模式</p>
 <pre><code>&lt;?php
 $cmd=$_GET[&apos;cmd&apos;]
@@ -137,7 +136,7 @@ if (isset($cmd)){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/15/远程代码执行/" data-id="cj1j9z46o0003shf69hucs3ww" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/04/15/远程代码执行/" data-id="cj1ja2dsd00033pf6m7d1rmdx" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -186,7 +185,7 @@ if (isset($cmd)){
       <ul>
         
           <li>
-            <a href="/2017/04/15/远程代码执行/">远程代码执行</a>
+            <a href="/2017/04/15/远程代码执行/">远程命令执行</a>
           </li>
         
           <li>
