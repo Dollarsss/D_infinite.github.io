@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,53 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PHP中的反序列化漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/17/PHP中的反序列化漏洞/" class="article-date">
+  <time datetime="2017-04-17T06:47:14.000Z" itemprop="datePublished">2017-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/17/PHP中的反序列化漏洞/">PHP中的反序列化漏洞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP中的反序列化漏洞"><a href="#PHP中的反序列化漏洞" class="headerlink" title="PHP中的反序列化漏洞"></a>PHP中的反序列化漏洞</h2><h3 id="0x01-什么是序列化？什么是反序列化？"><a href="#0x01-什么是序列化？什么是反序列化？" class="headerlink" title="0x01 什么是序列化？什么是反序列化？"></a>0x01 什么是序列化？什么是反序列化？</h3><p>序列化是将对象转换为字符串以便存储传输的一种方式。而反序列化恰好就是序列化的逆过程,反序列化会将字符串转换为对象供程序使用。在PHP中序列化和反序列化对应的函数分别为serialize()和unserialize()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">class Hello&#123;</div><div class="line">    public function sayHello()&#123;</div><div class="line">        echo &apos;Hello&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$a=new Hello();</div><div class="line">$s=serialize($a);</div><div class="line">$a_un=unserialize($s);</div><div class="line">echo $s.&apos;&lt;br&gt;&apos;;//O:5:&quot;Hello&quot;:0:&#123;&#125;</div><div class="line">echo $a_un;//Hello Object ()</div></pre></td></tr></table></figure>
+<h3 id="0x02-那这个序列化跟反序列化到底怎么利用？"><a href="#0x02-那这个序列化跟反序列化到底怎么利用？" class="headerlink" title="0x02 那这个序列化跟反序列化到底怎么利用？"></a>0x02 那这个序列化跟反序列化到底怎么利用？</h3><p>首先得科普一下，在php对象当中，有一类方法被称为<strong>魔术方法</strong>。这类方法以<code>__</code>开头，在操作对象的某些过程中，这些方法会被<strong>自动</strong>执行。而反序列化漏洞利用思路，便是跟这个魔术方法有关。当对字符串进行<code>unserialize</code>操作时，会自动调用对象中的<code>wakeup</code>方法，这就让我们有了可乘之机。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">class Hello&#123;</div><div class="line">    public function sayHello()&#123;</div><div class="line">        echo &apos;Hello&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public function __wakeup()</div><div class="line">    &#123;</div><div class="line">        phpinfo();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$a=new Hello();</div><div class="line">$s=serialize($a);</div><div class="line">$a_un=unserialize($s);</div></pre></td></tr></table></figure>
+<p>我们在之前代码的Hello对象当中添加了一个<code>__wakeup()</code>方法，里面调用了<code>phpinfo()</code>输出服务器中php的相关信息。当我们反序列化<code>$s</code>这个变量时，<code>phpinfo()</code>被执行了。</p>
+<h3 id="0x03-可是说了一大堆，-wakeup-又不是你写的，该怎么利用呢？"><a href="#0x03-可是说了一大堆，-wakeup-又不是你写的，该怎么利用呢？" class="headerlink" title="0x03 可是说了一大堆，__wakeup()又不是你写的，该怎么利用呢？"></a>0x03 可是说了一大堆，__wakeup()又不是你写的，该怎么利用呢？</h3><p>这个时候我们就要跟踪函数，观察函数当中有没有作为用户可控的部分，进而进行注入。这里就拿我最近做的一个ctf题来举例。<br>首先，题目的主页是一个留言墙，我们可以随意在上面输入想要的值。<br>其次，题目给了我部分源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">lists=[];</div><div class="line">class foo&#123;</div><div class="line">    public function __toString()&#123;</div><div class="line">    return highlightFile(&apos;heiheihei.txt&apos;).highlightFile($this-&gt;source,true)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里不需要去管<code>highlightFile</code>这个函数，我们需要关注的是，这个<code>__toString</code>中的<code>source</code>是我们可以控制的。<br>这个时候我们打开php手册查找<code>__toString</code>这个方法，发现如果<code>echo</code>某个该对象的实例，则会返回<code>__toString</code>返回的值。</p>
+<p>因此，可以精心构造一下序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$a=new foo();</div><div class="line">$a-&gt;source=&apos;index.php&apos;;</div><div class="line">$b=new foo();</div><div class="line">$b-&gt;source=$a;</div><div class="line">$c=serialize($b);</div><div class="line">echo $c;</div></pre></td></tr></table></figure>
+<p>为什么要让<code>$b-&gt;source=$a</code>呢，因为如果<code>$b</code>的<code>source</code>是一个字符串，那么就不会触发<code>__toString()</code>方法。而当指向<code>$a</code>时，则会试图通<code>__toString()</code>打开<code>source</code>,最后通过这个序列成功读取服务器上的隐藏文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/17/PHP中的反序列化漏洞/" data-id="cj1lrf56r00008yf6a1uxc4dt" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-远程代码执行" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,7 +152,7 @@ if (isset($cmd)){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/15/远程代码执行/" data-id="cj1ja8n1c0003kef6a71sf9md" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/04/15/远程代码执行/" data-id="cj1lrf57700068yf6u2k4ne6b" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -154,7 +201,7 @@ if (isset($cmd)){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/12/php中的弱类型转换/" data-id="cj1ja8n120000kef6kdy8u7ff" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/12/php中的弱类型转换/" data-id="cj1lrf57100038yf6ry4f3dda" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -196,7 +243,7 @@ if (isset($cmd)){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cj1ja8n1h0005kef6yfnj6qyq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/20/通过闭包解决循环异步问题/" data-id="cj1lrf57900078yf6ld5gjesk" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -250,7 +297,7 @@ RegExp.prototype.exec(String)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cj1ja8n1k0006kef6c5yfrpnc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/20/js中的正则表达式/" data-id="cj1lrf56z00028yf6oi242fok" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -305,7 +352,7 @@ friend.sayHi();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cj1ja8n1a0002kef6qcgbzk4j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/09/原型对象的重写/" data-id="cj1lrf57200048yf6llyat9da" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -373,7 +420,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="cj1ja8n170001kef68dfmjqqw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/09/margin-top的失效/" data-id="cj1lrf56w00018yf626vn96mj" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -409,7 +456,7 @@ background: #FFCC33;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="cj1ja8n1e0004kef6dj9xz2fv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/26/你好，世界/" data-id="cj1lrf57400058yf6hpx5wx5k" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -434,7 +481,7 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
@@ -444,9 +491,13 @@ background: #FFCC33;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/17/PHP中的反序列化漏洞/">PHP中的反序列化漏洞</a>
+          </li>
         
           <li>
             <a href="/2017/04/15/远程代码执行/">远程命令执行</a>
@@ -462,10 +513,6 @@ background: #FFCC33;
         
           <li>
             <a href="/2017/02/20/js中的正则表达式/">js中的正则表达式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/09/原型对象的重写/">原型对象的重写</a>
           </li>
         
       </ul>
