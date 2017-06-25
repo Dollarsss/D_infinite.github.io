@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>python中socket模块的使用 | D_infinite的小站</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">python中socket模块的使用</h1><a id="logo" href="/.">D_infinite的小站</a><p class="description">不积跬步，无以至千里。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Inicio</i></a><a href="/archives/"><i class="fa fa-archive"> Archivo</i></a><a href="/about/"><i class="fa fa-user"> Acerca de</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">python中socket模块的使用</h1><div class="post-meta">Jun 25, 2017<span> | </span><span class="category"><a href="/categories/python/">python</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h4 id="0x01-原理"><a href="#0x01-原理" class="headerlink" title="0x01 原理"></a>0x01 原理</h4><p>在python安全编程的世界当中，socket是和requests并驾齐驱，必须要掌握的一个模块。因为应用层上除了WEB的行为，你基本上都要使用socket去完成。<br><img src="http://static.oschina.net/uploads/space/2014/1103/154553_SGq0_1378445.jpg?_=5730135" alt=""><br>那么什么是socket呢？简单来说，就是区分同一服务器上不同应用程序的标识。其目的是为了完成从A主机上X进程到B主机上Y进程的通信。因此socket是工作在应用层和传输层之间的。如果你对什么是socket，什么是TCP,UDP不了解，建议阅读<a href="http://www.cnblogs.com/hissia/p/5730135.html" target="_blank" rel="external">这篇文章</a>，如果你从来没学过计算机网络，则请阅读<a href="http://blog.csdn.net/yaopeng_2005/article/details/7064869" target="_blank" rel="external">这篇文章</a>。</p>
+<p>注意，socket和socket模块是不一样的，这篇文章主要介绍socket模块的使用。</p>
+<h4 id="0x02-使用"><a href="#0x02-使用" class="headerlink" title="0x02 使用"></a>0x02 使用</h4><p>先让我们来看一个小小的Demo</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import <span class="built_in">socket</span></div><div class="line"></div><div class="line"></div><div class="line">s = <span class="built_in">socket</span>.<span class="built_in">socket</span>(<span class="built_in">socket</span>.AF_INET, <span class="built_in">socket</span>.SOCK_STREAM)</div></pre></td></tr></table></figure>
+<p>首先socket.socket是一个类，我们将其实例化之后传递给s，而实例化的参数如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">socket.socket(<span class="attr">family=AF_INET,</span> <span class="attr">type=SOCK_STREAM,</span> <span class="attr">proto=0,</span> <span class="attr">fileno=None)</span></div></pre></td></tr></table></figure>
+<p>family用于指定套接族，type用于指定套接类型，proto用于指定协议。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">family</th>
+<th style="text-align:right">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AF_UNIX</td>
+<td style="text-align:right">unix系统本地通信</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_INET</td>
+<td style="text-align:right">ipv4通信</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_INET6</td>
+<td style="text-align:right">ipv6通信</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">type</th>
+<th style="text-align:right">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SOCK_STREAM</td>
+<td style="text-align:right">基于TCP的流式socket通信</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_DGRAM</td>
+<td style="text-align:right">基于UDP的数据包式通信</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_RAW</td>
+<td style="text-align:right">原始套接字</td>
+</tr>
+</tbody>
+</table>
+<p>以上只是一部分，更多细节请参考官方手册。<br>完成初始化之后，就可以调用socket类的方法了。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.connect(('<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>', <span class="number">12345</span>))</div></pre></td></tr></table></figure>
+<p>在上面的demo当中，调用了connect方法。该方法传入一个address参数，该参数为元组形式，包括地址以及端口。意思就是建立连接，只有建立连接之后才能有后续动作。<br>(注：python3.5之后该方法超时不再引发InterruptedError)</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">while</span> True:</div><div class="line">	<span class="built_in">text</span> = input(<span class="string">'please input...'</span>)</div><div class="line">	<span class="built_in">print</span>()</div><div class="line">	s.send(<span class="built_in">text</span>.encode(<span class="string">'ascii'</span>))</div><div class="line">	data = s.recv(<span class="number">1024</span>)</div><div class="line">	<span class="built_in">print</span>(data.decode(<span class="string">'ascii'</span>))</div></pre></td></tr></table></figure>
+<p>recv方法传入一个bufsize参数，指定接收内容的大小。执行成功返回bytes对象。<br>send则是相反，发送一个bytes对象到对应客户端。因此，发送或接收时注意不要发送str对象，而应发送bytes对象。<br>(注：在python2中则为发送接收str对象)</p>
+<p>接下来开始服务器端的编写</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import <span class="built_in">socket</span></div><div class="line"></div><div class="line">s = <span class="built_in">socket</span>.<span class="built_in">socket</span>(<span class="built_in">socket</span>.AF_INET, <span class="built_in">socket</span>.SOCK_STREAM)</div><div class="line">s.bind((<span class="string">'127.0.0.1'</span>, <span class="number">12345</span>))</div></pre></td></tr></table></figure>
+<p>这里调用了bind方法。作用在于绑定主机地址和端口号，建立一个服务端的socket进程。<br>（注：这里如果写localhost或是127.0.0.1只能本机访问，如果需要让别的主机访问，可以使用<code>socket.gethostname()</code>。）</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">	conn, addr = s.accept()</div><div class="line">	<span class="keyword">print</span>(<span class="string">'connected by '</span>,addr)</div><div class="line">	<span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">		data = conn.recv(<span class="number">1024</span>)</div><div class="line">		<span class="keyword">print</span>(data.decode(<span class="string">'ascii'</span>))</div><div class="line">		conn.send(b<span class="string">'server received you message'</span>)</div></pre></td></tr></table></figure>
+<p>accept的方法是接受客户端发起的connect请求，该方法返回一个元组，包含一个新的socket对象以及地址对。在后续阶段，将使用这个新的socket对象与客户端进行交互。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.<span class="built_in">close</span>()</div></pre></td></tr></table></figure>
+<p>最后，在使用完成之后，记得关闭套接字。<br>至此，一个基本的通过socket通信的程序已经基本完成。</p>
+<h4 id="0x03-补充"><a href="#0x03-补充" class="headerlink" title="0x03 补充"></a>0x03 补充</h4><p>如果你还对socket的实际应用不太了解，建议多阅读<a href="https://www.exploit-db.com/" target="_blank" rel="external">exploit-db</a>上面的一些EXP，相当多都用到了socket。<br>如前阵子的<a href="https://www.exploit-db.com/exploits/42031/" target="_blank" rel="external">永恒之蓝</a>，又如14年臭名昭著的<a href="https://www.exploit-db.com/exploits/32745/" target="_blank" rel="external">心脏滴血</a>。</p>
+<p>当然socket的用途绝不仅限于编写EXP，但是通过阅读EXP，理解socket的本质，做到举一反三，对你非常有帮助。</p>
+<p>如果你对socket的一些细节用法不太了解，请手动查阅官方文档。</p>
+<h4 id="0x04-参考"><a href="#0x04-参考" class="headerlink" title="0x04 参考"></a>0x04 参考</h4><p><a href="https://gist.github.com/kevinkindom/108ffd675cb9253f8f71" target="_blank" rel="external">python-socket详细介绍</a></p>
+<p><a href="https://docs.python.org/3/library/socket.html" target="_blank" rel="external">socket官方文档(3.5)</a></p>
+<p><a href="https://docs.python.org/2/howto/sockets.html" target="_blank" rel="external">基于python2的官方tutorial</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2017/06/25/python中socket模块的使用/" data-id="cj4cih8ne0000w8f6pv8fg32z" class="article-share-link">Cuota</a><div class="tags"><a href="/tags/socket/">socket</a></div><div class="post-nav"><a href="/2017/05/27/XSS不完全指南/" class="next">XSS不完全指南</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categorías</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MISC/">MISC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL注入/">SQL注入</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/XSS/">XSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Etiquetas</i></div><div class="tagcloud"><a href="/tags/socket/" style="font-size: 15px;">socket</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recientes</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/25/python中socket模块的使用/">python中socket模块的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/XSS不完全指南/">XSS不完全指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/26/CTF中常用编码/">CTF中常用编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/24/浅谈PHP伪协议/">浅谈PHP伪协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/19/SQL构造操作符注入/">SQL构造操作符注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/17/PHP中的反序列化漏洞/">PHP中的反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/远程代码执行/">远程命令执行</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/12/PHP中的弱类型转换/">PHP中的弱类型转换</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/通过闭包解决循环异步问题/">通过闭包解决循环异步问题 </a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/js中的正则表达式/">js中的正则表达式</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">D_infinite的小站.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
