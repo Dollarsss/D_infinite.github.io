@@ -356,7 +356,23 @@
 <p>登录失败的情况也需要关注，登录失败的ip可用于关联分析其他恶意行为，以及登录失败的日志也可能被用作后门，具体可参考 <a href="https://www.freebuf.com/articles/system/185942.html" target="_blank" rel="external">记一次安全应急响应中遇到的利用SSH日志触发的后门分析</a></p>
 <p>2) 查看known_hosts<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~<span class="regexp">/.ssh/</span>known_hosts</div></pre></td></tr></table></figure></p>
 <p>known_hosts文件会记录通过ssh,scp访问的计算机的ip以及公钥</p>
-<p>3) ssh后门</p>
+<p>3) pam相关<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cat</span> /etc/pam.d/sshd</div><div class="line"><span class="keyword">ll</span> /lib64/security/pam_unix.<span class="keyword">so</span></div></pre></td></tr></table></figure></p>
+<p>查看sshd的pam配置文件以及认证文件是否存在异常，具体可参考文章<a href="https://wooyun.js.org/drops/Linux%20PAM&amp;&amp;PAM%E5%90%8E%E9%97%A8.html" target="_blank" rel="external">Linux PAM&amp;&amp;PAM后门</a></p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li>应用目录<ul>
+<li>Nginx: 查找nginx.conf配置文件，定位应用目录。检索目录下是否有异常文件(webshell)以及检索相应log日志是否有攻击或入侵痕迹</li>
+<li>Apache: 查找<code>apache2.conf</code>或<code>apache.conf</code>等配置文件，定位应用目录。检索目录下是否有异常文件(webshell)以及检索相应log日志是否有攻击或入侵痕迹</li>
+<li>webshell检测工具可使用长亭<a href="https://github.com/chaitin/cloudwalker" target="_blank" rel="external">牧云</a></li>
+</ul>
+</li>
+<li>/tmp</li>
+<li>/var/tmp</li>
+<li>/dev/shm</li>
+</ul>
+<h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3><ul>
+<li>用户目录下的history(通过/etc/passwd定位用户目录，查询每个目录下的.bash_history文件)</li>
+</ul>
+<p>### </p>
 
           
         
@@ -1969,7 +1985,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
