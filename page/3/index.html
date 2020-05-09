@@ -248,6 +248,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/02/09/margin-top的失效/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/09/margin-top的失效/" itemprop="url">margin-top在特殊情况下的失效</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-09T12:50:13+08:00">
+                2017-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在css中，某些情况下，相邻的两个或多个盒模型中的margin-top会塌陷（即失效）。如：</p>
+<pre><code>&lt;div id=&quot;box1&quot;&gt;
+    &lt;div id=&quot;box2&quot;&gt;
+        Hello World！
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+#box1{
+width: 200px;
+height: 200px;
+background-color: pink;
+}
+#box2{
+margin-top: 50px;
+background: #FFCC33;
+}
+</code></pre><p>  在上述情况中，不会出现：</p>
+<p>  <img src="https://i.stack.imgur.com/WFkp8.jpg" alt=""></p>
+<p>  而会出现：</p>
+<p>  <img src="https://i.stack.imgur.com/I3xJz.jpg" alt=""></p>
+<p>当以下两个条件被满足时会形成该特殊情况：</p>
+<ul>
+<li>父元素没有任何填充物，没有内边距，没有边框</li>
+<li>子元素处在父元素的顶部边缘</li>
+</ul>
+<p>解决办法有如下三种：</p>
+<ul>
+<li>使子元素的属性变为float</li>
+<li>使子元素的display属性变为inline-block</li>
+<li>使父元素可见（这里的可见既包括显式可见和隐式可见），如将overflow设置为auto</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2016/12/26/你好，世界/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -404,7 +555,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

