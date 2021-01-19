@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="netcat," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前ke推送的netcat的用法相信大家已经熟悉了，今天我来分享一下如何使用python去编写一个简单的netcat。当然了，实际使用的话，因为要依赖python环境，所以不免有点鸡肋，因此这篇文章更侧重于分享简单的python安全工具的写法。
+以下为要用到的python库。
+
+socket
+subprocess
+argparse
+同样的，本篇文章不对这些库做过多介绍，有兴趣的自行阅读官方文档。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python编写简单netcat">
+<meta property="og:url" content="http://dinfinite.cn/2017/07/03/python编写简单netcat/index.html">
+<meta property="og:site_name" content="D_infinite的小站">
+<meta property="og:description" content="之前ke推送的netcat的用法相信大家已经熟悉了，今天我来分享一下如何使用python去编写一个简单的netcat。当然了，实际使用的话，因为要依赖python环境，所以不免有点鸡肋，因此这篇文章更侧重于分享简单的python安全工具的写法。
+以下为要用到的python库。
+
+socket
+subprocess
+argparse
+同样的，本篇文章不对这些库做过多介绍，有兴趣的自行阅读官方文档。">
+<meta property="og:image" content="http://dinfinite.cn/images/netcat/netcat.png">
+<meta property="og:updated_time" content="2017-07-03T09:13:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python编写简单netcat">
+<meta name="twitter:description" content="之前ke推送的netcat的用法相信大家已经熟悉了，今天我来分享一下如何使用python去编写一个简单的netcat。当然了，实际使用的话，因为要依赖python环境，所以不免有点鸡肋，因此这篇文章更侧重于分享简单的python安全工具的写法。
+以下为要用到的python库。
+
+socket
+subprocess
+argparse
+同样的，本篇文章不对这些库做过多介绍，有兴趣的自行阅读官方文档。">
+<meta name="twitter:image" content="http://dinfinite.cn/images/netcat/netcat.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://dinfinite.cn/2017/07/03/python编写简单netcat/"/>
+
+
+
+
+
+  <title>python编写简单netcat | D_infinite的小站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">D_infinite的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不积跬步，无以至千里。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/07/03/python编写简单netcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python编写简单netcat</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T16:59:02+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前ke推送的netcat的用法相信大家已经熟悉了，今天我来分享一下如何使用python去编写一个简单的netcat。当然了，实际使用的话，因为要依赖python环境，所以不免有点鸡肋，因此这篇文章更侧重于分享简单的python安全工具的写法。</p>
+<p>以下为要用到的python库。</p>
+<ul>
+<li>socket</li>
+<li>subprocess</li>
+<li><p>argparse</p>
+<p>同样的，本篇文章不对这些库做过多介绍，有兴趣的自行阅读官方文档。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> argparse</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"><span class="keyword">import</span> traceback</div><div class="line"></div><div class="line"></div><div class="line">class netcat:</div><div class="line">    def __init__(<span class="built_in">self</span>):</div><div class="line">        <span class="built_in">self</span>.parser = argparse.ArgumentParser()</div><div class="line">        <span class="built_in">self</span>._init_args_parser()</div><div class="line">        <span class="built_in">self</span>.args = <span class="built_in">self</span>.parser.parse_args()</div><div class="line">        <span class="built_in">self</span>.client_socket = <span class="literal">None</span></div><div class="line">        <span class="built_in">self</span>.server_socket = <span class="literal">None</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">self</span>.args.l:</div><div class="line">            <span class="built_in">self</span>.listen_mode()</div><div class="line">        elif <span class="built_in">self</span>.args.c:</div><div class="line">            <span class="built_in">self</span>.client_mode()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>构造一个netcat类，一些常用变量直接设置为类变量方便访问。netcat的主程序即为<strong>init</strong>()，包括初始化以及后续执行阶段。<code>client_socket</code>为服务器被连接是的socket，<code>server_socket</code>则为客户端连接时获得的socket。<code>argparse.ArgumentParser()</code>返回一个操作命令行参数的对象，调用<code>parse_args()</code>获得参数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def _init_args_parser(self):</div><div class="line">        self.parser.add_argument('-l', <span class="keyword">help</span>=<span class="string">'listen mode'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-e'</span>, <span class="keyword">help</span>=<span class="string">'execute command'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-a'</span>, <span class="keyword">help</span>=<span class="string">'address'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">default</span>=<span class="string">'127.0.0.1'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-p'</span>, <span class="keyword">type</span>=<span class="built_in">int</span>, <span class="keyword">help</span>=<span class="string">'port'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-u'</span>, <span class="keyword">help</span>=<span class="string">'upload file'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-c'</span>, <span class="keyword">help</span>=<span class="string">'client mode'</span>, <span class="keyword">required</span>=<span class="literal">False</span>, <span class="keyword">action</span>=<span class="string">'store_true'</span>)</div><div class="line">        self.parser.add_argument(<span class="string">'-f'</span>, <span class="keyword">help</span>=<span class="string">'select file upload'</span>, <span class="keyword">required</span>=<span class="literal">False</span>)</div></pre></td></tr></table></figure>
+<p>这是具体的参数设置，<code>-l</code>表示参数前缀，<code>help</code>指定帮助display字段，required表示字段是否必须， <code>action=&#39;store_true&#39;</code>表示只要有前缀就返回<code>True</code>。其他字段以此类推。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">listen_mode</span><span class="params">(<span class="keyword">self</span>)</span></span>:</div><div class="line">       address = <span class="keyword">self</span>.args.a</div><div class="line">       port = <span class="keyword">self</span>.args.p</div><div class="line">       <span class="keyword">if</span> <span class="keyword">not</span> port <span class="keyword">or</span> <span class="keyword">not</span> <span class="symbol">address:</span></div><div class="line">           print(<span class="string">'not port or address'</span>)</div><div class="line">       <span class="symbol">else:</span></div><div class="line">           server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">           server_socket.bind((address, port))</div><div class="line"></div><div class="line">           server_socket.listen(<span class="number">1</span>)</div><div class="line"></div><div class="line">           <span class="keyword">while</span> <span class="symbol">True:</span></div><div class="line">               client_socket, addr = server_socket.accept()</div><div class="line">               <span class="keyword">self</span>.client_socket = client_socket</div><div class="line">               <span class="keyword">self</span>.server_handler()</div></pre></td></tr></table></figure>
+<p>监听模式，首先从命令行参数当中获取地址和端口，然后通过socket进行绑定。绑定后调用<code>accept</code>建立连接。然后将<code>client_socket</code>赋予到类变量当中。后续动作则交由<code>server_handler()</code>处理。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">def server_handler(<span class="keyword">self</span>):</div><div class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.client_socket:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">self</span>.args.e:</div><div class="line">                <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                    cmd_buffer = <span class="keyword">self</span>.get_client_input_buffer()</div><div class="line">                    response = <span class="keyword">self</span>.run_command(cmd_buffer)</div><div class="line">                    <span class="keyword">self</span>.client_socket.send(response)</div><div class="line">            elif <span class="keyword">self</span>.args.u:</div><div class="line">                <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                    <span class="keyword">try</span>:</div><div class="line">                        file_buffer = <span class="keyword">self</span>.get_client_input_buffer()</div><div class="line">                        file_buffer = file_buffer.decode(<span class="string">'utf-8'</span>)</div><div class="line">                        dest = <span class="keyword">self</span>.args.u</div><div class="line">                        <span class="keyword">with</span> open(dest, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                            f.write(file_buffer)</div><div class="line">                            f.close()</div><div class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> err:</div><div class="line">                        err_message = traceback.format_exc()</div><div class="line">                        err_message.encode(<span class="string">'utf-8'</span>)</div><div class="line">                        <span class="keyword">self</span>.client_socket.send(err_message)</div></pre></td></tr></table></figure>
+<p>如果存在e参数，则为执行命令模式。从客户端接收命令，然后调用<code>run_command()</code>处理。如果存在u参数，则为文件上传模式，从客户端接收文件，定义文件路径（包括文件名），然后写入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_command</span><span class="params">(self, command)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            output = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=<span class="keyword">True</span>)</div><div class="line">            <span class="keyword">return</span> output</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> err:</div><div class="line">            error_message = traceback.format_exc()</div><div class="line">            <span class="keyword">return</span> error_message.encode(<span class="string">'utf-8'</span>)</div></pre></td></tr></table></figure>
+<p>这里执行命令，调用了subprocess模块的check_output方法，第一个参数为执行的命令。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def client_mode(<span class="keyword">self</span>):</div><div class="line">        address = <span class="keyword">self</span>.args.a</div><div class="line">        port = <span class="keyword">self</span>.args.p</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">            server_socket.connect((address, port))</div><div class="line">        except <span class="keyword">Exception</span> <span class="keyword">as</span> err:</div><div class="line">            <span class="keyword">print</span>(err)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">self</span>.server_socket = server_socket</div><div class="line">        <span class="keyword">self</span>.client_handler()</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">client_handler</span><span class="params">(<span class="keyword">self</span>)</span></span>:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.args.<span class="symbol">f:</span></div><div class="line">            file_name = <span class="keyword">self</span>.args.f</div><div class="line">            file_buffer = <span class="string">''</span></div><div class="line">            with open(file_name, <span class="string">'r'</span>) as <span class="symbol">f:</span></div><div class="line">                <span class="keyword">for</span> line <span class="keyword">in</span> <span class="symbol">f:</span></div><div class="line">                    file_buffer += line</div><div class="line">                file_buffer.encode(<span class="string">'utf-8'</span>)</div><div class="line">                f.close()</div><div class="line">            <span class="keyword">self</span>.server_socket.send(file_buffer.encode(<span class="string">'utf-8'</span>))</div><div class="line">        elif <span class="keyword">self</span>.args.<span class="symbol">e:</span></div><div class="line">        	<span class="keyword">while</span> <span class="symbol">True:</span></div><div class="line">            	cmd = input()</div><div class="line">            	<span class="keyword">self</span>.server_socket.send(cmd.encode(<span class="string">'utf-8'</span>))</div><div class="line">            	data = <span class="keyword">self</span>.server_socket.recv(<span class="number">1024</span>)</div><div class="line">            	print(data.decode(<span class="string">'utf-8'</span>))</div></pre></td></tr></table></figure>
+<p>客户端的实现也是类似，理解应该不是问题。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">test </span>= netcat()</div></pre></td></tr></table></figure>
+<p>当然，当然，最后，还得调用一下。<br>至此，一个相当的简陋的netcat算是完工了，我们跑起来测试一下。<br><img src="/images/netcat/netcat.png" alt="测试截图"></p>
+<p>提醒一下，py3当中socket不管收发都是用的bytes而非str，所以编写的时候要注意了。<br>代码还有很多问题，并且功能非常简陋，这个只是作为demo展示。如果你有更好的想法，欢迎在我的<a href="https://github.com/Dollarsss/netcat" target="_blank" rel="external">github</a>上留言。(别太care头像..)<br>最后，这段代码的思路参考了《python黑帽子：黑客与渗透测试编程之道》，目前中文版好像没有电子版，大家有兴趣可以买来阅读，当然，英语好的直接阅读原版就好。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/netcat/" rel="tag"># netcat</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/25/python中socket模块的使用/" rel="next" title="python中socket模块的使用">
+                <i class="fa fa-chevron-left"></i> python中socket模块的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/14/2017年总结/" rel="prev" title="2017年总结">
+                2017年总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">D_infinite</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D_infinite</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
