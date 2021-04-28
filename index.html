@@ -248,6 +248,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2021/04/28/深入分析Mimikatz之sekurlsa-wdigest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D_infinite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="D_infinite的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/28/深入分析Mimikatz之sekurlsa-wdigest/" itemprop="url">深入分析Mimikatz之sekurlsa::wdigest</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-28T16:41:21+08:00">
+                2021-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x01-背景知识"><a href="#0x01-背景知识" class="headerlink" title="0x01 背景知识"></a>0x01 背景知识</h2><p><code>wdigest</code>是一套身份认证协议，主要用于<code>windows server 2003</code>，由于wdigest会将用户的密码存储在内存中，因此被诸如<code>mimikatz</code>等工具进行恶意利用。</p>
+<h2 id="0x02-获取加密密码"><a href="#0x02-获取加密密码" class="headerlink" title="0x02 获取加密密码"></a>0x02 获取加密密码</h2><p>该模块中定义了名为<code>PasswdSet</code>的变量，由代码可知，需要搜索的文件为<code>wdigest.dll</code><br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428155820.png" alt=""></p>
+<p>根据字节特征，发现<code>0x483bd974</code>对应l_LogSessionList，这是一个链表，链表末尾所指向的结构体中，存储了username/domain/password，其位置在<code>wdigest.dll</code>的<code>LogSessHandlerPasswdSet</code>函数中。但是里面的password是加密的，因此需要密钥进行解密。<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428155604.png" alt=""></p>
+<h2 id="0x03-获取解密密钥"><a href="#0x03-获取解密密钥" class="headerlink" title="0x03 获取解密密钥"></a>0x03 获取解密密钥</h2><p>在mimikatz中，解密的逻辑使用了<code>pLsaUnprotectMemory</code>所指向的函数<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428160525.png" alt=""><br>其实际指向<code>kuhl_m_sekurlsa_nt6_LsaEncryptMemory</code>函数<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428160728.png" alt=""><br>可以看到，分为<code>AES</code>和<code>DES</code>解密两种情况，而<code>hKey</code>的获取，在<code>kuhl_m_sekurlsa_nt6_acquireKeys</code>中，这里面则依然是根据特征进行内存搜索<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428160950.png" alt=""><br>此处搜索的文件(加载在内存中)不再是<code>wdigest.dll</code>，而是<code>lsasrv.dll</code>，根据mimikatz给出的特征进行搜索，可以看到对应的代码如下<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428161435.png" alt=""><br>剩下的事情就比较简单了，根据对应的位置，将key转换成结构体就行<br><img src="https://dinfinite.oss-cn-beijing.aliyuncs.com/20210428164323.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2021/01/19/CVE-2020-1938(Tomcat AJP)漏洞分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1700,180 +1823,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dinfinite.cn/2017/04/24/浅谈PHP伪协议/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="D_infinite">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="D_infinite的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/24/浅谈PHP伪协议/" itemprop="url">浅谈PHP伪协议</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T11:39:45+08:00">
-                2017-04-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="0x01-介绍"><a href="#0x01-介绍" class="headerlink" title="0x01 介绍"></a>0x01 介绍</h3><p>这里引用官网的解释</p>
-<blockquote>
-<p> PHP 带有很多内置 URL 风格的封装协议，可用于类似 fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数。 除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议。</p>
-</blockquote>
-<p>而对于<code>php://</code>，官网的解释如下</p>
-<blockquote>
-<p> PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符， 内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
-</blockquote>
-<h3 id="0x02-功能"><a href="#0x02-功能" class="headerlink" title="0x02 功能"></a>0x02 功能</h3><p><code>php://</code>主要支持以下几种类型协议</p>
-<h4 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h4><blockquote>
-<p> php://input 是个可以访问请求的原始数据的只读流。 POST 请求的情况下，最好使用 php://input 来代替  $HTTP_RAW_POST_DATA，因为它不依赖于特定的 php.ini 指令。 而且，这样的情况下 $HTTP_RAW_POST_DATA 默认没有填充， 比激活 always_populate_raw_post_data 潜在需要更少的内存。 enctype=”multipart/form-data” 的时候 php://input 是无效的。</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">$ok=$_POST[<span class="string">'ok'</span>];</div><div class="line">$ok2=$_POST[<span class="string">'ok2'</span>];</div><div class="line">$test=readfile(<span class="string">'php://input'</span>,<span class="string">'r'</span>);<span class="comment">//ok=1&amp;ok2=2</span></div></pre></td></tr></table></figure>
-<h4 id="php-output"><a href="#php-output" class="headerlink" title="php://output"></a>php://output</h4><blockquote>
-<p>php://output 是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"><span class="keyword">echo</span> <span class="string">'ok'</span>;</div><div class="line">$test=readfile(<span class="string">'php://output'</span>,<span class="string">'r'</span>);<span class="comment">//ok</span></div></pre></td></tr></table></figure>
-<h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><blockquote>
-<p>php://filter 是一种元封装器， 设计用于数据流打开时的筛选过滤应用。 这对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、 file() 和 file_get_contents()， 在数据流内容读取之前没有机会应用其他过滤器。</p>
-</blockquote>
-<p>一般来讲，resource是链接，但是通过<code>read</code>参数，可以读取文这里不需要开启allow_url_include参数也可以读取远程链接或文件。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">$test=readfile(<span class="string">'php://filter/read=convert.base64-encode/resource=3'</span>,<span class="string">'r'</span>);</div></pre></td></tr></table></figure>
-<p>此时，能输出文件3的base64编码。</p>
-<h3 id="0x03-除了PHP-之外"><a href="#0x03-除了PHP-之外" class="headerlink" title="0x03 除了PHP://之外"></a>0x03 除了PHP://之外</h3><h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><blockquote>
-<p>data://伪协议 &gt;&gt; 数据流封装器，和php://相似都是利用了流的概念，将原本的include的文件流重定向到了用户可控制的输入流中，简单来说就是执行文件的包含方法包含了你的输入流，通过你输入payload来实现目的；</p>
-</blockquote>
-<p>用法：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?<span class="keyword">file</span>=data:<span class="comment">//text/plain;base64,base64编码的payload</span></div></pre></td></tr></table></figure></p>
-<p>效果跟php://input是一样的，只不过不需要将数据放到post当中，直接在url输入即可。</p>
-<h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><blockquote>
-<p>phar://伪协议 &gt;&gt; 数据流包装器，自 PHP 5.3.0 起开始有效，正好契合上面两个伪协议的利用条件。说通俗点就是php解压缩包的一个函数，解压的压缩包与后缀无关。</p>
-</blockquote>
-<p>用法：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?<span class="keyword">file</span>=phar:<span class="comment">//压缩包/内部文件</span></div></pre></td></tr></table></figure></p>
-<p>只能解压phar以及zip后缀,rar不行。通常用于上传绕过。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1924,7 +1873,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
